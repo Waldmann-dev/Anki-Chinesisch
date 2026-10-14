@@ -33,9 +33,7 @@
   label.chk input{margin-top:4px;accent-color:var(--ink);width:18px;height:18px;flex:none}
   .count{color:var(--muted);font-size:13px}
   .folder{font-weight:700}
-  fieldset{border:1px solid var(--line);border-radius:10px;margin:16px 0 0;padding:12px 14px}
-  legend{font-weight:700;padding:0 6px}
-  fieldset label{display:inline-flex;gap:8px;align-items:center;margin-right:18px;cursor:pointer}
+  #setupView label{display:inline-flex;gap:8px;align-items:center;margin-right:18px;cursor:pointer}
   /* quiz */
   .progress{height:8px;background:#e9e4d8;border-radius:999px;overflow:hidden;margin:4px 0 14px}
   .progress>div{height:100%;background:var(--ink);width:0%}
@@ -100,13 +98,14 @@
     </div>
     <div id="treeWrap"><p class="muted">Loading decks from GitHub…</p></div>
 
-    <fieldset>
-      <legend>2. Order</legend>
+    <h2 style="margin:16px 0 8px;font-size:19px">2. Order</h2>
+    <div>
       <label><input type="radio" name="order" value="random" checked> Random <span class="muted">(shuffled)</span></label>
       <label><input type="radio" name="order" value="inorder"> In order <span class="muted">(as in the repo)</span></label>
-    </fieldset>
+    </div>
 
-    <p class="muted">3. Go through the cards, reveal each answer, then grade yourself honestly: <strong>Correct</strong> or <strong>Wrong</strong>.</p>
+    <h2 style="margin:16px 0 8px;font-size:19px">3. How it works</h2>
+    <p class="muted" style="margin:0">Go through the cards, reveal each answer, then grade yourself honestly: <strong>Correct</strong> or <strong>Wrong</strong>.</p>
     <button id="startBtn" class="primary wide" disabled>Start quiz</button>
     <p class="muted small" id="selLabel" style="margin:10px 0 0"></p>
     <div id="status"></div>
@@ -153,7 +152,7 @@
   <p>Anki-style quiz. Cards load <strong>live</strong> from the <a href="https://github.com/Waldmann-dev/Anki-Chinesisch" target="_blank" rel="noopener">GitHub repo</a> — no copy, no algorithm. Each card comes up exactly once per round.</p>
   <p class="muted small">Source: <a href="https://github.com/Waldmann-dev/Anki-Chinesisch" target="_blank" rel="noopener">Waldmann-dev/Anki-Chinesisch</a> · <span id="loadedAt">loading…</span></p>
 </footer>
-<div class="version">v1.7</div>
+<div class="version">v1.8</div>
 
 <script>
 const REPO = "Waldmann-dev/Anki-Chinesisch";
