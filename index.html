@@ -155,7 +155,7 @@
   <p>Anki-style quiz. Cards load <strong>live</strong> from the <a href="https://github.com/Waldmann-dev/Anki-Chinesisch" target="_blank" rel="noopener">GitHub repo</a> — no copy, no algorithm. Each card comes up exactly once per round.</p>
   <p class="muted small">Source: <a href="https://github.com/Waldmann-dev/Anki-Chinesisch" target="_blank" rel="noopener">Waldmann-dev/Anki-Chinesisch</a> · <span id="loadedAt">loading…</span></p>
 </footer>
-<div class="version">v2.4</div>
+<div class="version">v2.5</div>
 
 <script>
 const REPO = "Waldmann-dev/Anki-Chinesisch";
@@ -289,7 +289,6 @@ function renderNode(node, path){
   const open0 = !path.includes("/"); // top-level folder: start expanded
   tgl.type = "button"; tgl.className = "toggle"; tgl.textContent = open0 ? "▾" : "▸";
   tgl.setAttribute("aria-label", "Expand sub-decks"); tgl.setAttribute("aria-expanded", String(open0));
-  row.appendChild(tgl);
   const flabel = el("label", "chk");
   const fcb = document.createElement("input");
   fcb.type = "checkbox"; fcb.dataset.folder = path; fcb.checked = true;
@@ -303,6 +302,7 @@ function renderNode(node, path){
   fspan.appendChild(el("span", "count", ` (${total} cards)`));
   flabel.appendChild(fspan);
   row.appendChild(flabel);
+  row.appendChild(tgl);
   li.appendChild(row);
   const sub = el("ul");
   if (!open0) sub.classList.add("collapsed");
