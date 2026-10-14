@@ -155,7 +155,7 @@
   <p>Anki-style quiz. Cards load <strong>live</strong> from the <a href="https://github.com/Waldmann-dev/Anki-Chinesisch" target="_blank" rel="noopener">GitHub repo</a> — no copy, no algorithm. Each card comes up exactly once per round.</p>
   <p class="muted small">Source: <a href="https://github.com/Waldmann-dev/Anki-Chinesisch" target="_blank" rel="noopener">Waldmann-dev/Anki-Chinesisch</a> · <span id="loadedAt">loading…</span></p>
 </footer>
-<div class="version">v2.3</div>
+<div class="version">v2.4</div>
 
 <script>
 const REPO = "Waldmann-dev/Anki-Chinesisch";
@@ -281,13 +281,14 @@ function renderNode(node, path){
     li.appendChild(label);
     return li;
   }
-  // Folder (with or without own cards). Sub-decks start collapsed;
-  // the small arrow expands them only on click.
+  // Folder (with or without own cards). Top-level folders start expanded,
+  // deeper levels start collapsed; the arrow toggles on click.
   const li = document.createElement("li");
   const row = el("div", "treerow");
   const tgl = document.createElement("button");
-  tgl.type = "button"; tgl.className = "toggle"; tgl.textContent = "▸";
-  tgl.setAttribute("aria-label", "Expand sub-decks"); tgl.setAttribute("aria-expanded", "false");
+  const open0 = !path.includes("/"); // top-level folder: start expanded
+  tgl.type = "button"; tgl.className = "toggle"; tgl.textContent = open0 ? "▾" : "▸";
+  tgl.setAttribute("aria-label", "Expand sub-decks"); tgl.setAttribute("aria-expanded", String(open0));
   row.appendChild(tgl);
   const flabel = el("label", "chk");
   const fcb = document.createElement("input");
@@ -304,8 +305,8 @@ function renderNode(node, path){
   row.appendChild(flabel);
   li.appendChild(row);
   const sub = el("ul");
-  sub.classList.add("collapsed");
-  let open = false;
+  if (!open0) sub.classList.add("collapsed");
+  let open = open0;
   tgl.addEventListener("click", () => {
     open = !open;
     sub.classList.toggle("collapsed", !open);
