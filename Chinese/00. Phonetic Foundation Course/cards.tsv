@@ -1,100 +1,100 @@
 Question	Answer	Example
-What does a Chinese syllable consist of?	Initial + Final + Tone (mark)	dà = d + a + 4th tone
-What is shēngmǔ (声母)?	Initial – consonant at start of syllable	d in dà
-What is yùnmǔ (韵母)?	Final – rest of syllable after initial	a in dà
-What is shēngdiào (声调)?	Tone – pitch pattern of syllable	4th tone in dà
-What is shēngfú (声符)?	Tone mark – small mark over the final	— ´ ˇ `
-Can a syllable have no initial?	Yes – zero-initial syllable	wǔ
-Can a syllable have no final?	No – final is mandatory	–
-What is a zero-initial syllable?	Syllable with no initial, only a final; written with y, w, yu, or '	é, yī, wǔ
-What are the zero initials?	y, w, yu	yī, wǔ, yuè
-What tones exist in Mandarin?	4 tones + neutral tone	mā, má, mǎ, mà, ma
-What are the 4 tones?	1st high-flat, 2nd rising, 3rd falling-rising, 4th falling	–
-What is the 1st tone called?	yīshēng, yīnpíng	mā
-What is the 2nd tone called?	èrshēng, yángpíng	má
-What is the 3rd tone called?	sānshēng, shǎngshēng	mǎ
-What is the 4th tone called?	sìshēng, qùshēng	mà
-What is the neutral tone called?	qīngshēng	ma
-What is the sign for the 1st tone?	— (flat bar)	mā
-What is the sign for the 2nd tone?	´ (rising)	má
-What is the sign for the 3rd tone?	ˇ (falling-rising)	mǎ
-What is the sign for the 4th tone?	` (falling)	mà
-What is the sign for the neutral tone?	No mark (shown as · for toneless)	ma
-How does the 1st tone go?	High-flat, stays high: 55	mā
-How does the 2nd tone go?	Rising, low to high: 35	má
-How does the 3rd tone go?	Falling then rising, low dip: 214	mǎ
-How does the 4th tone go?	Falling, high to low, sharp: 51	mà
-How does the neutral tone go?	Weak, short, no fixed pitch; tone reduction	ma
-Why do tones matter?	Different tone = different meaning	mā vs mà
-Where is the tone mark if there is only 1 vowel?	Directly over that vowel	lù
-Where is the tone mark if there are 2+ vowels?	Over the main vowel – the vowel with widest mouth opening	hǎo
-What is the order for tone-mark placement?	a > o > e > i > u > ü	a gets the mark first
-Which vowel gets the tone mark in "ao"?	a	hǎo
-Which vowel gets the tone mark in "ou"?	o	gòu
-Which vowel gets the tone mark in "ei"?	e	bēi
-Which vowel gets the tone mark in "ia"?	a	jiā
-Which vowel gets the tone mark in "uo"?	o	guó
-Which vowel gets the tone mark in "ie"?	e	bié
-Which vowel gets the tone mark in "üe"?	e	yuè
-What is the exception for "iu"?	Tone mark on u, not i	liù
-What is the exception for "ui"?	Tone mark on i, not u	guì
-What happens to the dot when the tone mark is over i?	Dot is replaced by the tone mark	nǐ, píng
-What are the initials?	b, p, m, f, d, t, n, l, g, k, h, j, q, x, zh, ch, sh, r, z, c, s (+ y, w, yu as zero initials)	–
-What are the initials b, p, m, f?	b, p, m bilabial; f labiodental; like English	–
-What is the difference between b and p?	Same place; b unaspirated, p aspirated	–
-What are the initials d, t, n, l?	Alveolar; like English	–
-What is the difference between d and t?	Same place; d unaspirated, t aspirated	–
-What are the initials g, k, h?	Velar; back of tongue raised to soft palate	–
-What is the difference between g and k?	Same place; g unaspirated, k aspirated	–
-How do you pronounce h?	Back of tongue raised toward palate; strong h	hǎo
-What are the initials zh, ch, sh, r?	Retroflex; tongue tip curled up	–
-How do you pronounce zh / ch / sh / r?	zh like j in "jungle" (unaspirated); ch like ch in "church" (aspirated); sh like sh in "school"; r like r in "rock"	zhè, chī, shì, rén
-What are the initials j, q, x?	Palatal	–
-What are the initials z, c, s?	Dental sibilants	–
-What is a fricative?	Consonant where air is pressed through a narrow opening, creating friction	f, sh, x, h, s
-What is a lateral?	Consonant where air escapes at the sides of the tongue	l
-What are the simple finals?	a, o, e, i, u, ü, -i[ɿ]	–
-How are bo, po, mo, fo pronounced?	With short u: buo, puo, muo, fuo	bo → buo
-How do you pronounce final e?	Tongue like for o, lips flattened + opened like a smile; like "uh" in "her"	gē
-How do you pronounce final ü?	Tongue like for i, lips rounded	nǚ
-What is the final -i in zhi, chi, shi, ri?	-i [ɿ], not simple i; tongue does not move after the initial	zhi, chi, shi, ri
-What are the diphthongs ai, ei, ao, ou?	Main vowel + secondary vowel; tone mark on main vowel	–
-How do you pronounce diphthongs?	Main vowel longer, clearer, louder; secondary vowel short, weak	–
-How do you pronounce ei / ou?	ei like "ay" in "day"; ou like "o" in "gold"	bēi, gòu
-What are the nasal finals?	Ending in -n = front nasal; ending in -ng = back nasal	an, en, ang, eng, ong
-How do you pronounce a front nasal final?	Vowel first, then n in the same breath	an like in "an"
-How do you pronounce a back nasal final?	Vowel first, then ng in the same breath	ang like "ng" in "sing"
-What are the u-finals?	Glide u + main vowel OR glide u + nasal final	ua, uo, uai, uei, uan, uen, uang, ueng
-How do you pronounce u-finals?	Say u first, then glide naturally to the rest	guā, huì
-What are the 4 types of finals?	Kāikǒu open (no lip rounding), Qíchǐ front unrounded with i-glide, Hékǒu back rounded with u-glide, Cuōkǒu front rounded with ü-glide	–
-How is the 3rd tone pronounced alone?	Full 3rd tone	nǐ, hǎo, mǎ, nǚ
-What happens with 3rd + 3rd tone?	First becomes 2nd tone; tone mark stays unchanged	nǐ hǎo → ní hǎo
-Give examples of 3rd + 3rd tone sandhi.	hěn hǎo → hén hǎo; yǔfǎ → yúfǎ; kěyǐ → kéyǐ	–
-What happens with 3rd + 1st / 2nd / 4th / neutral?	First becomes half-3rd (fall only, no rise)	hěn gāo, hěn bái, hěn dà
-How is yī pronounced alone / at the end / as ordinal?	1st tone: yī	yī
-What happens with yī + 1st / 2nd / 3rd tone?	Becomes 4th tone: yì	yì bēi, yì píng, yì běn
-What happens with yī + 4th tone?	Becomes 2nd tone: yí	yí biàn
-Pinyin spelling: i alone → ?	yi; in → yin; ing → ying	i → yi
-Pinyin spelling: diphthong starting with i as own syllable?	i → y	ia → ya, ie → ye, ian → yan
-Pinyin spelling: u alone → ?	wu	u → wu
-Pinyin spelling: diphthong starting with u as own syllable?	u → w	ua → wa, uan → wan
-Pinyin spelling: ü alone / diphthong starting with ü?	Add y, drop the dots	ü → yu, üe → yue, üan → yuan
-When do you use an apostrophe in Pinyin?	In multi-syllable words, if a syllable starts with a, o, e, put ' before the vowel	Tiān'ān Mén, Xī'ōu, tiān'é
-What happens to ü after j, q, x?	Dots are dropped; written as u but pronounced as ü	jù, qù, xué
-What happens to ü after n, l?	Dots are kept	nǚ, lǜ
-What are whole-syllable readings?	16 syllables read as a whole, not split into initial + final	zhi, chi, shi, ri, zi, ci, si, yi, wu, yu, ye, yue, yuan, yin, yun, ying
-What is the omission rule for o / e?	In some compound finals, o / e are dropped or weakened	–
-What is the origin of Chinese characters?	Pictograms; modern form is square-shaped, developed from ancient signs	马
-What is bǐhuà (笔画)?	Strokes – dots and lines that make up a character	–
-What is a basic stroke?	Stroke where writing direction stays the same from start to end	héng 一
-What is a derived stroke?	Stroke where direction changes while writing	zhé ┐, shù gōu 亅
-What are the 6 basic strokes?	héng 一, shù 丨, piě 丿, diǎn 丶, nà ㇏, tí ㇀	–
-What is the stroke-order rule "horizontal before vertical"?	Horizontal first, then vertical	十
-What is the stroke-order rule "left-falling before right-falling"?	Piě first, then nà	八
-What is the stroke-order rule "top to bottom"?	Top first, then bottom	三
-What is the stroke-order rule "left to right"?	Left first, then right	川
-What is the stroke-order rule "outside to inside"?	Outside first, then inside	月
-What is the stroke-order rule "inside to outside"?	Inside first, then outside	山
-What is the stroke-order rule "outside-inside-then-close"?	Outside, then inside, then close	日
-What is the stroke-order rule "middle before sides"?	Middle stroke first, then both sides	小
-What is the stroke-order rule for the dot?	Dot often last	玉
+What does a Chinese syllable consist of?	Initial + Final + Tone mark. The initial is optional, the final is mandatory.	dà = d + a + 4th tone
+What is shēngmǔ (声母)?	Initial – the consonant at the start of a syllable.	d in dà
+What is yùnmǔ (韵母)?	Final – the rest of the syllable after the initial. It carries the tone.	a in dà
+What is shēngdiào (声调)?	Tone – the pitch pattern of a syllable. It can change the meaning.	4th tone in dà
+What is shēngfú (声符)?	Tone mark – the small mark over the final that shows the tone.	— ´ ˇ `
+Can a syllable have no initial?	Yes – this is a zero-initial syllable.	wǔ
+Can a syllable have no final?	No – the final is mandatory in every syllable.	–
+What is a zero-initial syllable?	A syllable with no initial, only a final. It is written with y, w, yu, or '.	é, yī, wǔ
+What are the zero initials?	y, w, yu – they are spelling variants for syllables without a real initial.	yī, wǔ, yuè
+What tones exist in Mandarin?	4 tones + neutral tone. The neutral tone is a weak, toneless variant.	mā, má, mǎ, mà, ma
+What are the 4 tones?	1st high-flat, 2nd rising, 3rd falling-rising, 4th falling.	–
+What is the 1st tone called?	yīshēng, yīnpíng – the high-flat tone.	mā
+What is the 2nd tone called?	èrshēng, yángpíng – the rising tone.	má
+What is the 3rd tone called?	sānshēng, shǎngshēng – the falling-rising tone.	mǎ
+What is the 4th tone called?	sìshēng, qùshēng – the falling tone.	mà
+What is the neutral tone called?	qīngshēng – the light, toneless tone.	ma
+What is the sign for the 1st tone?	— (flat bar) over the main vowel.	mā
+What is the sign for the 2nd tone?	´ (rising) over the main vowel.	má
+What is the sign for the 3rd tone?	ˇ (falling-rising) over the main vowel.	mǎ
+What is the sign for the 4th tone?	` (falling) over the main vowel.	mà
+What is the sign for the neutral tone?	No mark. It is sometimes shown as · to mark it as toneless.	ma
+How does the 1st tone go?	High-flat, stays high: 55. Like singing one steady high note.	mā
+How does the 2nd tone go?	Rising, low to high: 35. Like asking "What?" in English.	má
+How does the 3rd tone go?	Falling then rising, low dip: 214. In speech often only the fall (half-3rd).	mǎ
+How does the 4th tone go?	Falling, high to low, sharp: 51. Like a firm "No!".	mà
+How does the neutral tone go?	Weak, short, no fixed pitch. It is a tone reduction, not a full tone.	ma
+Why do tones matter?	Different tone = different meaning. The same syllable changes meaning with tone.	mā vs mà
+Where is the tone mark if there is only 1 vowel?	Directly over that vowel.	lù
+Where is the tone mark if there are 2+ vowels?	Over the main vowel – the vowel with the widest mouth opening.	hǎo
+What is the order for tone-mark placement?	a > o > e > i > u > ü. The widest vowel gets the mark first.	–
+Which vowel gets the tone mark in "ao"?	a – a is wider than o.	hǎo
+Which vowel gets the tone mark in "ou"?	o – o is wider than u.	gòu
+Which vowel gets the tone mark in "ei"?	e – e is wider than i.	bēi
+Which vowel gets the tone mark in "ia"?	a – a is wider than i.	jiā
+Which vowel gets the tone mark in "uo"?	o – o is wider than u.	guó
+Which vowel gets the tone mark in "ie"?	e – e is wider than i.	bié
+Which vowel gets the tone mark in "üe"?	e – e is wider than ü.	yuè
+What is the exception for "iu"?	"iu" is short for "iou". The o is omitted, so the mark goes on u.	liù
+What is the exception for "ui"?	"ui" is short for "uei". The e is omitted, so the mark goes on i.	guì
+What happens to the dot when the tone mark is over i?	The dot is replaced by the tone mark.	nǐ, píng
+What are the initials?	b, p, m, f, d, t, n, l, g, k, h, j, q, x, zh, ch, sh, r, z, c, s (+ y, w, yu as zero initials).	–
+What are the initials b, p, m, f?	b, p, m are bilabial; f is labiodental. Pronunciation is like English.	–
+What is the difference between b and p?	Same place; b is unaspirated, p is aspirated (with a puff of air).	–
+What are the initials d, t, n, l?	Alveolar initials. Pronunciation is like English.	–
+What is the difference between d and t?	Same place; d is unaspirated, t is aspirated.	–
+What are the initials g, k, h?	Velar initials. The back of the tongue is raised to the soft palate.	–
+What is the difference between g and k?	Same place; g is unaspirated, k is aspirated.	–
+How do you pronounce h?	Back of tongue raised toward the palate; a strong h.	hǎo
+What are the initials zh, ch, sh, r?	Retroflex initials. The tongue tip is curled up.	–
+How do you pronounce zh / ch / sh / r?	zh like j in "jungle" (unaspirated); ch like ch in "church" (aspirated); sh like sh in "school"; r like r in "rock".	zhè, chī, shì, rén
+What are the initials j, q, x?	Palatal initials.	–
+What are the initials z, c, s?	Dental sibilants.	–
+What is a fricative?	A consonant where air is pressed through a narrow opening, creating friction.	f, sh, x, h, s
+What is a lateral?	A consonant where air escapes at the sides of the tongue.	l
+What are the simple finals?	a, o, e, i, u, ü, -i[ɿ].	–
+How are bo, po, mo, fo pronounced?	With a short u: buo, puo, muo, fuo.	bo → buo
+How do you pronounce final e?	Tongue like for o, lips flattened and opened like a smile. Like "uh" in "her".	gē
+How do you pronounce final ü?	Tongue like for i, lips rounded.	nǚ
+What is the final -i in zhi, chi, shi, ri?	-i [ɿ], not simple i. The tongue does not move after the initial.	zhi, chi, shi, ri
+What are the diphthongs ai, ei, ao, ou?	Main vowel + secondary vowel. The tone mark goes on the main vowel.	–
+How do you pronounce diphthongs?	Main vowel longer, clearer, louder; secondary vowel short and weak.	–
+How do you pronounce ei / ou?	ei like "ay" in "day"; ou like "o" in "gold".	bēi, gòu
+What are the nasal finals?	Ending in -n = front nasal; ending in -ng = back nasal.	an, en, ang, eng, ong
+How do you pronounce a front nasal final?	Vowel first, then n in the same breath.	an like in "an"
+How do you pronounce a back nasal final?	Vowel first, then ng in the same breath.	ang like "ng" in "sing"
+What are the u-finals?	Glide u + main vowel, or glide u + nasal final.	ua, uo, uai, uei, uan, uen, uang, ueng
+How do you pronounce u-finals?	Say u first, then glide naturally to the rest.	guā, huì
+What are the 4 types of finals?	Kāikǒu open (no rounding), Qíchǐ front unrounded with i-glide, Hékǒu back rounded with u-glide, Cuōkǒu front rounded with ü-glide.	–
+How is the 3rd tone pronounced alone?	Full 3rd tone – fall then rise.	nǐ, hǎo, mǎ, nǚ
+What happens with 3rd + 3rd tone?	First becomes 2nd tone. The tone mark stays unchanged.	nǐ hǎo → ní hǎo
+Give examples of 3rd + 3rd tone sandhi.	hěn hǎo → hén hǎo; yǔfǎ → yúfǎ; kěyǐ → kéyǐ.	–
+What happens with 3rd + 1st / 2nd / 4th / neutral?	First becomes half-3rd – fall only, no rise.	hěn gāo, hěn bái, hěn dà
+How is yī pronounced alone / at the end / as ordinal?	1st tone: yī.	yī
+What happens with yī + 1st / 2nd / 3rd tone?	Becomes 4th tone: yì.	yì bēi, yì píng, yì běn
+What happens with yī + 4th tone?	Becomes 2nd tone: yí.	yí biàn
+Pinyin spelling: i alone → ?	yi; in → yin; ing → ying. Add y before i.	i → yi
+Pinyin spelling: diphthong starting with i as own syllable?	i becomes y.	ia → ya, ie → ye, ian → yan
+Pinyin spelling: u alone → ?	wu. Add w before u.	u → wu
+Pinyin spelling: diphthong starting with u as own syllable?	u becomes w.	ua → wa, uan → wan
+Pinyin spelling: ü alone / diphthong starting with ü?	Add y, drop the dots.	ü → yu, üe → yue, üan → yuan
+When do you use an apostrophe in Pinyin?	In multi-syllable words, if a syllable starts with a, o, e, put ' before the vowel.	Tiān'ān Mén, Xī'ōu, tiān'é
+What happens to ü after j, q, x?	Dots are dropped. Written as u but pronounced as ü.	jù, qù, xué
+What happens to ü after n, l?	Dots are kept.	nǚ, lǜ
+What are whole-syllable readings?	16 syllables read as a whole, not split into initial + final.	zhi, chi, shi, ri, zi, ci, si, yi, wu, yu, ye, yue, yuan, yin, yun, ying
+What is the omission rule for o / e?	In some compound finals, o / e are dropped or weakened.	–
+What is the origin of Chinese characters?	Pictograms. Modern form is square-shaped, developed from ancient signs.	马
+What is bǐhuà (笔画)?	Strokes – the dots and lines that make up a character.	–
+What is a basic stroke?	A stroke where the writing direction stays the same from start to end.	héng 一
+What is a derived stroke?	A stroke where the direction changes while writing.	zhé ┐, shù gōu 亅
+What are the 6 basic strokes?	héng 一, shù 丨, piě 丿, diǎn 丶, nà ㇏, tí ㇀.	–
+What is the stroke-order rule "horizontal before vertical"?	Horizontal first, then vertical.	十
+What is the stroke-order rule "left-falling before right-falling"?	Piě first, then nà.	八
+What is the stroke-order rule "top to bottom"?	Top first, then bottom.	三
+What is the stroke-order rule "left to right"?	Left first, then right.	川
+What is the stroke-order rule "outside to inside"?	Outside first, then inside.	月
+What is the stroke-order rule "inside to outside"?	Inside first, then outside.	山
+What is the stroke-order rule "outside-inside-then-close"?	Outside, then inside, then close.	日
+What is the stroke-order rule "middle before sides"?	Middle stroke first, then both sides.	小
+What is the stroke-order rule for the dot?	Dot often last.	玉
