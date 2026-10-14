@@ -124,16 +124,18 @@
   </section>
 
   <!-- RESULTS -->
-  <section id="resultsView" class="box hidden">
+  <section id="resultsView" class="hidden">
+    <button id="homeBtn" class="primary wide" style="font-size:18px;padding:16px">← Back to deck selection</button>
+    <div class="box" style="margin-top:12px">
     <h2 style="margin:0;font-size:19px">Done! 🎉</h2>
     <div class="score" id="resScore"></div>
     <p id="resText" style="margin:0"></p>
     <div class="row" style="margin-top:18px">
       <button id="retryWrongBtn" class="primary">Repeat only wrong cards</button>
       <button id="retryAllBtn" class="ghost">Repeat same selection</button>
-      <button id="newSelBtn" class="ghost">New selection</button>
     </div>
     <div id="wrongWrap" class="wrong"></div>
+    </div>
   </section>
 </main>
 
@@ -453,7 +455,7 @@ $("retryAllBtn").addEventListener("click", () => {
   const cards = selectedDecks().flatMap(d => d.cards);
   if (cards.length) startRound(cards, queueMeta); else { $("resultsView").classList.add("hidden"); $("setupView").classList.remove("hidden"); }
 });
-$("newSelBtn").addEventListener("click", () => { $("resultsView").classList.add("hidden"); $("setupView").classList.remove("hidden"); });
+$("homeBtn").addEventListener("click", () => { $("resultsView").classList.add("hidden"); $("setupView").classList.remove("hidden"); });
 $("reloadBtn").addEventListener("click", () => init().catch(showErr));
 document.addEventListener("keydown", (e) => {
   if ($("quizView").classList.contains("hidden")) return;
