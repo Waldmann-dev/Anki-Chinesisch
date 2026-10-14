@@ -60,6 +60,9 @@
   .wrong details{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin:8px 0}
   .wrong summary{cursor:pointer;font-weight:650}
   .wrong .ans{margin-top:8px;white-space:pre-wrap}
+  .treerow{display:flex;gap:2px;align-items:flex-start}
+  button.toggle{background:none;border:0;padding:6px 4px;cursor:pointer;font-size:13px;line-height:1.5;color:var(--muted)}
+  ul.collapsed{display:none}
   #status{margin-top:12px}
   .error{background:#fdecea;border:1px solid #f5c6c0;border-radius:10px;padding:12px 14px}
   .hidden{display:none!important}
@@ -79,7 +82,7 @@
       <h2 style="margin:0;font-size:19px">1. Choose decks</h2>
       <span class="muted" id="totalLabel"></span>
     </div>
-    <p class="muted" style="margin:8px 0 0">Tick a folder to take all its decks, or tick single decks. A deck with its own cards (e.g. <em>00. Pinyin</em>) counts separately from its sub-decks.</p>
+    <p class="muted" style="margin:8px 0 0">Only top-level decks are shown. Click ▸ to expand a deck and pick its sub-decks. Tick a folder to take all its decks, or tick single decks. A deck with its own cards (e.g. <em>00. Pinyin</em>) counts separately from its sub-decks.</p>
     <div class="row" style="margin-top:12px">
       <button id="allBtn" class="ghost">Select all</button>
       <button id="noneBtn" class="ghost">Deselect all</button>
@@ -88,8 +91,8 @@
 
     <fieldset>
       <legend>2. Order</legend>
-      <label><input type="radio" name="order" value="inorder" checked> In order <span class="muted">(as in the repo)</span></label>
-      <label><input type="radio" name="order" value="random"> Random <span class="muted">(shuffled)</span></label>
+      <label><input type="radio" name="order" value="random" checked> Random <span class="muted">(shuffled)</span></label>
+      <label><input type="radio" name="order" value="inorder"> In order <span class="muted">(as in the repo)</span></label>
     </fieldset>
 
     <p class="muted">3. Go through the cards, reveal each answer, then grade yourself honestly: <strong>Correct</strong> or <strong>Wrong</strong>.</p>
@@ -242,8 +245,14 @@ function renderNode(node, path){
     li.appendChild(label);
     return li;
   }
-  // Folder (with or without own cards)
+  // Folder (with or without own cards). Sub-decks start collapsed;
+  // the small arrow expands them only on click.
   const li = document.createElement("li");
+  const row = el("div", "treerow");
+  const tgl = document.createElement("button");
+  tgl.type = "button"; tgl.className = "toggle"; tgl.textContent = "▸";
+  tgl.setAttribute("aria-label", "Expand sub-decks"); tgl.setAttribute("aria-expanded", "false");
+  row.appendChild(tgl);
   const flabel = el("label", "chk");
   const fcb = document.createElement("input");
   fcb.type = "checkbox"; fcb.dataset.folder = path; fcb.checked = true;
@@ -256,8 +265,17 @@ function renderNode(node, path){
   fspan.appendChild(el("span", "folder", node.name));
   fspan.appendChild(el("span", "count", ` (${total} cards)`));
   flabel.appendChild(fspan);
-  li.appendChild(flabel);
+  row.appendChild(flabel);
+  li.appendChild(row);
   const sub = el("ul");
+  sub.classList.add("collapsed");
+  let open = false;
+  tgl.addEventListener("click", () => {
+    open = !open;
+    sub.classList.toggle("collapsed", !open);
+    tgl.textContent = open ? "▾" : "▸";
+    tgl.setAttribute("aria-expanded", String(open));
+  });
   if (node.deck){
     const ownLi = document.createElement("li");
     const olabel = el("label", "chk");
