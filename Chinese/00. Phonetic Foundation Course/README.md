@@ -2,6 +2,9 @@
 
 Deck: `Chinese::00. Phonetic Foundation Course`
 
-Phonetic foundation course: the 4 tones + neutral tone, tone-change rules, all initials, and the key finals. Master this first — everything else builds on it.
+Source: Neues Praktisches Chinesisch (3rd ed.), Book 1, Lesson 1 – Phonetics (语音) sections only. No exercises.
 
-Cards: Chinese → English, with Pinyin + example sentence.
+Format: Q&A knowledge recall, in English.
+`cards.tsv` columns: Question | Answer | Example
+
+Each card is short and concise. Import in Anki: File > Import, separator Tab.
