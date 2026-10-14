@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chinese Flashcards — Live from GitHub</title>
+<meta name="description" content="Anki-style flashcards for the Chinese deck. Loads cards live from the GitHub repo, no algorithm, each card once per round.">
+<style>
+  :root{--bg:#f6f4ef;--card:#fff;--ink:#1c1c1c;--muted:#6b675e;--line:#e5e0d5;--accent:#c0392b;--green:#1e7d4d;--red:#b42318;--blue:#1d4ed8}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.5}
+  header{max-width:760px;margin:0 auto;padding:28px 16px 8px}
+  h1{margin:0;font-size:28px;line-height:1.15}
+  .sub{color:var(--muted);margin:8px 0 0}
+  .sub a{color:inherit}
+  main{max-width:760px;margin:0 auto;padding:8px 16px 48px}
+  .box{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px}
+  .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  .muted{color:var(--muted);font-size:14px}
+  .small{font-size:13px}
+  button{border:0;border-radius:10px;padding:12px 18px;font-size:16px;font-weight:650;cursor:pointer}
+  button:disabled{opacity:.45;cursor:not-allowed}
+  .primary{background:var(--ink);color:#fff}
+  .good{background:var(--green);color:#fff}
+  .bad{background:var(--red);color:#fff}
+  .ghost{background:#eee9df;color:var(--ink)}
+  .wide{width:100%}
+  /* deck tree */
+  ul.tree{list-style:none;margin:12px 0 0;padding:0}
+  ul.tree ul{list-style:none;margin:4px 0 4px 22px;padding:0;border-left:1px solid var(--line)}
+  ul.tree li{padding:5px 0 5px 8px}
+  label.chk{display:flex;gap:10px;align-items:flex-start;cursor:pointer}
+  label.chk input{margin-top:4px;accent-color:var(--ink);width:18px;height:18px;flex:none}
+  .count{color:var(--muted);font-size:13px}
+  .folder{font-weight:700}
+  fieldset{border:1px solid var(--line);border-radius:10px;margin:16px 0 0;padding:12px 14px}
+  legend{font-weight:700;padding:0 6px}
+  fieldset label{display:inline-flex;gap:8px;align-items:center;margin-right:18px;cursor:pointer}
+  /* quiz */
+  .progress{height:8px;background:#e9e4d8;border-radius:999px;overflow:hidden;margin:4px 0 14px}
+  .progress>div{height:100%;background:var(--ink);width:0%}
+  .topline{display:flex;justify-content:space-between;gap:12px;color:var(--muted);font-size:14px;margin-bottom:10px}
+  .decklabel{font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+  .front{font-size:22px;font-weight:650;margin:10px 0 6px;white-space:pre-wrap;overflow-wrap:anywhere}
+  .front.big{font-size:56px;line-height:1.2}
+  .hint{color:var(--muted);font-size:14px;margin:0 0 14px}
+  .answer{border-top:1px solid var(--line);margin-top:16px;padding-top:16px}
+  .answer .a{font-size:20px;font-weight:650;white-space:pre-wrap;overflow-wrap:anywhere}
+  .answer .pinyin{font-size:28px;font-weight:700}
+  .answer .eng{font-size:20px;margin-top:4px}
+  .example{margin-top:14px;background:#faf7f0;border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+  .example .zh{font-size:22px}
+  .example .py{color:var(--muted)}
+  .grade{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+  .grade button{padding:14px}
+  kbd{background:#eee9df;border:1px solid var(--line);border-bottom-width:2px;border-radius:6px;padding:1px 6px;font-size:12px}
+  /* results */
+  .score{font-size:56px;font-weight:800;line-height:1;margin:8px 0}
+  .wrong{margin-top:18px}
+  .wrong details{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin:8px 0}
+  .wrong summary{cursor:pointer;font-weight:650}
+  .wrong .ans{margin-top:8px;white-space:pre-wrap}
+  #status{margin-top:12px}
+  .error{background:#fdecea;border:1px solid #f5c6c0;border-radius:10px;padding:12px 14px}
+  .hidden{display:none!important}
+</style>
+</head>
+<body>
+<header>
+  <h1>🇨🇳 Chinese Flashcards</h1>
+  <p class="sub">Anki-style quiz. Cards load <strong>live</strong> from the GitHub repo — no copy, no algorithm. Each card comes up exactly once per round.<br>
+  <span class="small">Source: <a href="https://github.com/Waldmann-dev/Anki-Chinesisch" target="_blank" rel="noopener">Waldmann-dev/Anki-Chinesisch</a> · <span id="loadedAt">loading…</span> · <button id="reloadBtn" class="ghost" style="padding:6px 10px;font-size:13px">↻ Reload from GitHub</button></span></p>
+</header>
+
+<main>
+  <!-- SETUP -->
+  <section id="setupView" class="box">
+    <div class="row" style="justify-content:space-between">
+      <h2 style="margin:0;font-size:19px">1. Choose decks</h2>
+      <span class="muted" id="totalLabel"></span>
+    </div>
+    <p class="muted" style="margin:8px 0 0">Tick a folder to take all its decks, or tick single decks. A deck with its own cards (e.g. <em>00. Pinyin</em>) counts separately from its sub-decks.</p>
+    <div class="row" style="margin-top:12px">
+      <button id="allBtn" class="ghost">Select all</button>
+      <button id="noneBtn" class="ghost">Deselect all</button>
+    </div>
+    <div id="treeWrap"><p class="muted">Loading decks from GitHub…</p></div>
+
+    <fieldset>
+      <legend>2. Order</legend>
+      <label><input type="radio" name="order" value="inorder" checked> In order <span class="muted">(as in the repo)</span></label>
+      <label><input type="radio" name="order" value="random"> Random <span class="muted">(shuffled)</span></label>
+    </fieldset>
+
+    <p class="muted">3. Go through the cards, reveal each answer, then grade yourself honestly: <strong>Correct</strong> or <strong>Wrong</strong>.</p>
+    <button id="startBtn" class="primary wide" disabled>Start quiz</button>
+    <p class="muted small" id="selLabel" style="margin:10px 0 0"></p>
+    <div id="status"></div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quizView" class="box hidden">
+    <div class="topline"><span id="qCounter"></span><span id="qScore"></span></div>
+    <div class="progress"><div id="qBar"></div></div>
+    <div class="decklabel" id="qDeck"></div>
+    <div class="front" id="qFront"></div>
+    <p class="hint" id="qHint"></p>
+    <div id="answerWrap" class="answer hidden">
+      <div id="qAnswer"></div>
+      <div id="qExample"></div>
+    </div>
+    <div id="revealRow"><button id="revealBtn" class="primary wide">Show answer <span class="muted" style="color:#ddd;font-weight:400">(Space)</span></button></div>
+    <div id="gradeRow" class="grade hidden">
+      <button id="wrongBtn" class="bad">✗ Wrong <span style="font-weight:400">(←)</span></button>
+      <button id="rightBtn" class="good">✓ Correct <span style="font-weight:400">(→)</span></button>
+    </div>
+    <p class="muted small" style="margin:14px 0 0"><button id="quitBtn" class="ghost" style="padding:6px 10px;font-size:13px">← Back to deck selection</button> &nbsp; Your progress in this round is discarded.</p>
+  </section>
+
+  <!-- RESULTS -->
+  <section id="resultsView" class="box hidden">
+    <h2 style="margin:0;font-size:19px">Done! 🎉</h2>
+    <div class="score" id="resScore"></div>
+    <p id="resText" style="margin:0"></p>
+    <div class="row" style="margin-top:18px">
+      <button id="retryWrongBtn" class="primary">Repeat only wrong cards</button>
+      <button id="retryAllBtn" class="ghost">Repeat same selection</button>
+      <button id="newSelBtn" class="ghost">New selection</button>
+    </div>
+    <div id="wrongWrap" class="wrong"></div>
+  </section>
+</main>
+
+<script>
+const REPO = "Waldmann-dev/Anki-Chinesisch";
+const BRANCH = "main";
+const TREE_URL = `https://api.github.com/repos/${REPO}/git/trees/${BRANCH}?recursive=1`;
+const rawUrl = (path) => `https://raw.githubusercontent.com/${REPO}/${BRANCH}/${path.split("/").map(encodeURIComponent).join("/")}`;
+
+// ---------- state ----------
+let decks = [];          // [{path, label, parts, cards}]
+let treeRoot = null;     // tree nodes for the picker
+let queue = [];          // cards for current round
+let queueMeta = null;    // {selectedPaths, order}
+let idx = 0, correct = 0, wrongCards = [];
+
+// ---------- helpers ----------
+const $ = (id) => document.getElementById(id);
+const el = (tag, cls, text) => { const n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; };
+const isDash = (s) => s == null || s.trim() === "" || s.trim() === "–" || s.trim() === "-";
+function shuffle(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+
+// ---------- TSV parsing ----------
+// Q&A: Question | Answer | Example
+// Vocab: Chinese | Pinyin | English | Example (Chinese) | Example (Pinyin) | Example (English)
+function parseTSV(text, path){
+  const lines = text.replace(/\r\n?/g, "\n").split("\n").filter(l => l.trim() !== "");
+  if (lines.length < 2) return [];
+  const header = lines[0].split("\t").map(h => h.trim());
+  const cards = [];
+  for (const line of lines.slice(1)){
+    const cols = line.split("\t");
+    const get = (i) => (cols[i] ?? "").trim();
+    if (header[0] === "Question"){
+      cards.push({ deck: path, type: "qa", q: get(0), a: get(1), ex: get(2) });
+    } else if (header[0] === "Chinese"){
+      cards.push({ deck: path, type: "vocab", zh: get(0), pinyin: get(1), en: get(2), exZh: get(3), exPy: get(4), exEn: get(5) });
+    }
+  }
+  return cards.filter(c => (c.q || c.zh));
+}
+
+// ---------- loading live from GitHub ----------
+async function loadDecks(){
+  $("status").innerHTML = "";
+  $("treeWrap").innerHTML = "<p class='muted'>Loading decks from GitHub…</p>";
+  $("startBtn").disabled = true;
+  const treeRes = await fetch(TREE_URL, { headers: { "Accept": "application/vnd.github+json" } });
+  if (!treeRes.ok) throw new Error(`GitHub API ${treeRes.status} — try again in a minute (rate limit?)`);
+  const tree = await treeRes.json();
+  const tsvPaths = tree.tree.filter(t => t.type === "blob" && t.path.endsWith("/cards.tsv")).map(t => t.path).sort();
+  decks = [];
+  for (const p of tsvPaths){
+    const res = await fetch(rawUrl(p));
+    if (!res.ok) throw new Error(`Could not load ${p} (${res.status})`);
+    const cards = parseTSV(await res.text(), p);
+    const dir = p.replace(/\/cards\.tsv$/, "");
+    decks.push({ path: dir, label: dir.split("/").join(" :: "), parts: dir.split("/"), cards });
+  }
+  decks.sort((a,b) => a.path.localeCompare(b.path));
+  buildTree();
+  renderTree();
+  $("loadedAt").textContent = "loaded " + new Date().toLocaleString();
+  const total = decks.reduce((s,d) => s + d.cards.length, 0);
+  $("totalLabel").textContent = total + " cards in " + decks.length + " decks";
+  updateSelectionLabel();
+}
+
+// ---------- deck tree (folders + decks with own cards) ----------
+// Model: deck checkboxes carry data-deck="<full dir path>" and are the ONLY
+// source of selection. Folder checkboxes carry data-folder and only toggle
+// all deck checkboxes below them. A node with BOTH own cards and children
+// (e.g. 00. Pinyin) gets a folder row + a separate "own cards" deck row,
+// so unchecking one sub-deck never silently drops the 20 own cards.
+function buildTree(){
+  treeRoot = { name: "Chinese", children: new Map(), deck: null };
+  for (const d of decks){
+    let node = treeRoot;
+    for (let i = 1; i < d.parts.length; i++){
+      const part = d.parts[i];
+      if (!node.children.has(part)) node.children.set(part, { name: part, children: new Map(), deck: null });
+      node = node.children.get(part);
+    }
+    node.deck = d;
+  }
+}
+function descendantDecks(node, out = []){ if (node.deck) out.push(node.deck); for (const c of node.children.values()) descendantDecks(c, out); return out; }
+function deckCheckbox(path){
+  const cb = document.createElement("input");
+  cb.type = "checkbox"; cb.dataset.deck = path; cb.checked = true;
+  cb.addEventListener("change", () => { syncCheckboxes(); updateSelectionLabel(); });
+  return cb;
+}
+function renderTree(){
+  const wrap = $("treeWrap"); wrap.innerHTML = "";
+  const ul = el("ul", "tree");
+  for (const child of treeRoot.children.values()) ul.appendChild(renderNode(child, "Chinese/" + child.name));
+  wrap.appendChild(ul);
+  syncCheckboxes();
+}
+function renderNode(node, path){
+  const total = descendantDecks(node).reduce((s,d)=>s+d.cards.length,0);
+  // Leaf deck: single deck row, no folder row.
+  if (node.deck && node.children.size === 0){
+    const li = document.createElement("li");
+    const label = el("label", "chk");
+    label.appendChild(deckCheckbox(path));
+    const span = document.createElement("span");
+    span.appendChild(el("span", "", node.name));
+    span.appendChild(el("span", "count", ` (${node.deck.cards.length} cards)`));
+    label.appendChild(span);
+    li.appendChild(label);
+    return li;
+  }
+  // Folder (with or without own cards)
+  const li = document.createElement("li");
+  const flabel = el("label", "chk");
+  const fcb = document.createElement("input");
+  fcb.type = "checkbox"; fcb.dataset.folder = path; fcb.checked = true;
+  fcb.addEventListener("change", () => {
+    li.querySelectorAll("input[data-deck]").forEach(c => { c.checked = fcb.checked; });
+    syncCheckboxes(); updateSelectionLabel();
+  });
+  flabel.appendChild(fcb);
+  const fspan = document.createElement("span");
+  fspan.appendChild(el("span", "folder", node.name));
+  fspan.appendChild(el("span", "count", ` (${total} cards)`));
+  flabel.appendChild(fspan);
+  li.appendChild(flabel);
+  const sub = el("ul");
+  if (node.deck){
+    const ownLi = document.createElement("li");
+    const olabel = el("label", "chk");
+    olabel.appendChild(deckCheckbox(path));
+    const ospan = document.createElement("span");
+    ospan.appendChild(el("span", "", "Own cards — " + node.name));
+    ospan.appendChild(el("span", "count", ` (${node.deck.cards.length} cards)`));
+    olabel.appendChild(ospan);
+    ownLi.appendChild(olabel);
+    sub.appendChild(ownLi);
+  }
+  for (const child of node.children.values()) sub.appendChild(renderNode(child, path + "/" + child.name));
+  li.appendChild(sub);
+  return li;
+}
+function syncCheckboxes(){
+  // Bottom-up: folder reflects its descendant deck checkboxes. Deepest first.
+  const folders = [...document.querySelectorAll("#treeWrap input[data-folder]")];
+  // sort by depth (more slashes = deeper) descending
+  folders.sort((a,b) => (b.dataset.folder.split("/").length) - (a.dataset.folder.split("/").length));
+  for (const fcb of folders){
+    const li = fcb.closest("li");
+    const subs = [...li.querySelectorAll(":scope > ul input[data-deck]")];
+    if (!subs.length) continue;
+    const on = subs.filter(c => c.checked).length;
+    if (on === 0){ fcb.checked = false; fcb.indeterminate = false; }
+    else if (on === subs.length){ fcb.checked = true; fcb.indeterminate = false; }
+    else { fcb.checked = false; fcb.indeterminate = true; }
+  }
+}
+function selectedDecks(){
+  const byPath = new Map(decks.map(d => [d.path, d]));
+  return [...document.querySelectorAll("#treeWrap input[data-deck]")]
+    .filter(c => c.checked).map(c => byPath.get(c.dataset.deck)).filter(Boolean);
+}
+function selectedCardCount(){ return selectedDecks().reduce((s,d) => s + d.cards.length, 0); }
+function updateSelectionLabel(){
+  const n = selectedCardCount();
+  $("selLabel").textContent = n === 0 ? "No cards selected." : `${n} card${n===1?"":"s"} selected.`;
+  $("startBtn").disabled = n === 0;
+}
+
+// ---------- quiz ----------
+function startRound(cardList, meta){
+  queue = cardList.slice();
+  const order = document.querySelector("input[name=order]:checked").value;
+  if (order === "random") shuffle(queue);
+  queueMeta = meta || { order };
+  idx = 0; correct = 0; wrongCards = [];
+  $("setupView").classList.add("hidden");
+  $("resultsView").classList.add("hidden");
+  $("quizView").classList.remove("hidden");
+  showCard();
+}
+function showCard(){
+  const card = queue[idx];
+  $("qCounter").textContent = `Card ${idx+1} of ${queue.length}`;
+  $("qScore").textContent = `✓ ${correct} · ✗ ${wrongCards.length}`;
+  $("qBar").style.width = (idx / queue.length * 100) + "%";
+  const deck = decks.find(d => d.path === card.deck);
+  $("qDeck").textContent = deck ? deck.label : card.deck;
+  $("answerWrap").classList.add("hidden");
+  $("revealRow").classList.remove("hidden");
+  $("gradeRow").classList.add("hidden");
+  $("qAnswer").innerHTML = ""; $("qExample").innerHTML = "";
+  if (card.type === "qa"){
+    $("qFront").className = "front"; $("qFront").textContent = card.q;
+    $("qHint").textContent = "Think of the answer, then reveal it.";
+  } else {
+    $("qFront").className = "front big"; $("qFront").textContent = card.zh;
+    $("qHint").textContent = "What is the Pinyin and the English meaning?";
+  }
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+function reveal(){
+  const card = queue[idx];
+  $("answerWrap").classList.remove("hidden");
+  $("revealRow").classList.add("hidden");
+  $("gradeRow").classList.remove("hidden");
+  if (card.type === "qa"){
+    const a = el("div", "a", card.a); $("qAnswer").appendChild(a);
+    if (!isDash(card.ex)){
+      const ex = el("div", "example");
+      ex.appendChild(el("div", "small muted", "Example"));
+      ex.appendChild(el("div", "", card.ex));
+      $("qExample").appendChild(ex);
+    }
+  } else {
+    const p = el("div", "pinyin", card.pinyin); $("qAnswer").appendChild(p);
+    $("qAnswer").appendChild(el("div", "eng", card.en));
+    if (!isDash(card.exZh) || !isDash(card.exPy) || !isDash(card.exEn)){
+      const ex = el("div", "example");
+      ex.appendChild(el("div", "small muted", "Example"));
+      if (!isDash(card.exZh)) ex.appendChild(el("div", "zh", card.exZh));
+      if (!isDash(card.exPy)) ex.appendChild(el("div", "py", card.exPy));
+      if (!isDash(card.exEn)) ex.appendChild(el("div", "", card.exEn));
+      $("qExample").appendChild(ex);
+    }
+  }
+}
+function grade(ok){
+  const card = queue[idx];
+  if (ok) correct++; else wrongCards.push(card);
+  idx++;
+  if (idx >= queue.length) showResults();
+  else showCard();
+}
+function showResults(){
+  $("quizView").classList.add("hidden");
+  $("resultsView").classList.remove("hidden");
+  const total = queue.length;
+  const pct = total ? Math.round(correct / total * 100) : 0;
+  $("resScore").textContent = `${correct} / ${total} · ${pct}%`;
+  $("resText").textContent = wrongCards.length === 0
+    ? "Perfect round — every card correct. 🎉"
+    : `You got ${correct} right and ${wrongCards.length} wrong. Review the wrong ones below.`;
+  $("retryWrongBtn").style.display = wrongCards.length ? "" : "none";
+  const wrap = $("wrongWrap"); wrap.innerHTML = "";
+  if (wrongCards.length){
+    wrap.appendChild(el("h3", "", "Wrong cards — review"));
+    for (const card of wrongCards){
+      const det = document.createElement("details");
+      const sum = document.createElement("summary");
+      sum.textContent = card.type === "qa" ? card.q : `${card.zh} — ${card.pinyin} — ${card.en}`;
+      det.appendChild(sum);
+      const ans = el("div", "ans");
+      if (card.type === "qa") ans.textContent = card.a + (!isDash(card.ex) ? `\nExample: ${card.ex}` : "");
+      else ans.textContent = `${card.pinyin}\n${card.en}` + (!isDash(card.exZh) ? `\nExample: ${card.exZh} (${card.exPy}) — ${card.exEn}` : "");
+      det.appendChild(ans);
+      wrap.appendChild(det);
+    }
+  }
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+// ---------- events ----------
+$("allBtn").addEventListener("click", () => { document.querySelectorAll("#treeWrap input[data-deck]").forEach(c => { c.checked = true; }); syncCheckboxes(); updateSelectionLabel(); });
+$("noneBtn").addEventListener("click", () => { document.querySelectorAll("#treeWrap input[data-deck]").forEach(c => { c.checked = false; }); syncCheckboxes(); updateSelectionLabel(); });
+$("startBtn").addEventListener("click", () => {
+  const cards = selectedDecks().flatMap(d => d.cards);
+  startRound(cards, { order: document.querySelector("input[name=order]:checked").value });
+});
+$("revealBtn").addEventListener("click", reveal);
+$("rightBtn").addEventListener("click", () => grade(true));
+$("wrongBtn").addEventListener("click", () => grade(false));
+$("quitBtn").addEventListener("click", () => { $("quizView").classList.add("hidden"); $("setupView").classList.remove("hidden"); });
+$("retryWrongBtn").addEventListener("click", () => { startRound(wrongCards, queueMeta); });
+$("retryAllBtn").addEventListener("click", () => {
+  const cards = selectedDecks().flatMap(d => d.cards);
+  if (cards.length) startRound(cards, queueMeta); else { $("resultsView").classList.add("hidden"); $("setupView").classList.remove("hidden"); }
+});
+$("newSelBtn").addEventListener("click", () => { $("resultsView").classList.add("hidden"); $("setupView").classList.remove("hidden"); });
+$("reloadBtn").addEventListener("click", () => init().catch(showErr));
+document.addEventListener("keydown", (e) => {
+  if ($("quizView").classList.contains("hidden")) return;
+  if (e.key === " " && !$("revealRow").classList.contains("hidden")){ e.preventDefault(); reveal(); }
+  else if (!$("gradeRow").classList.contains("hidden")){
+    if (e.key === "ArrowRight") grade(true);
+    if (e.key === "ArrowLeft") grade(false);
+  }
+});
+function showErr(err){
+  $("status").innerHTML = "";
+  const d = el("div", "error", "Could not load decks from GitHub: " + err.message);
+  $("status").appendChild(d);
+  $("treeWrap").innerHTML = "<p class='muted'>Loading failed — press ↻ Reload to try again.</p>";
+}
+async function init(){ try { await loadDecks(); } catch (e){ showErr(e); } }
+init();
+</script>
+</body>
+</html>
