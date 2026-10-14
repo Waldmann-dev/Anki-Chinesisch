@@ -60,9 +60,13 @@
   .wrong details{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin:8px 0}
   .wrong summary{cursor:pointer;font-weight:650}
   .wrong .ans{margin-top:8px;white-space:pre-wrap}
+  .howto{list-style:none;margin:10px 0 0;padding:0;font-size:18px;line-height:1.55}
+  .howto li{margin:8px 0}
+  .howto .big-arrow{font-size:26px;vertical-align:-2px}
   .treerow{display:flex;gap:8px;align-items:center}
-  button.toggle{background:#eee9df;border:1px solid var(--line);border-radius:10px;padding:10px 12px;min-width:48px;min-height:48px;cursor:pointer;font-size:24px;line-height:1;color:var(--ink);flex:none}
+  button.toggle{background:#eee9df;border:1px solid var(--line);border-radius:10px;padding:10px 12px;min-width:56px;min-height:56px;cursor:pointer;font-size:28px;line-height:1;color:var(--ink);flex:none}
   ul.collapsed{display:none}
+  .version{position:fixed;right:12px;bottom:12px;z-index:50;background:#eee9df;border:1px solid var(--line);border-radius:999px;padding:4px 10px;font-size:12px;color:var(--muted)}
   #status{margin-top:12px}
   .error{background:#fdecea;border:1px solid #f5c6c0;border-radius:10px;padding:12px 14px}
   .hidden{display:none!important}
@@ -82,7 +86,12 @@
       <h2 style="margin:0;font-size:19px">1. Choose decks</h2>
       <span class="muted" id="totalLabel"></span>
     </div>
-    <p class="muted" style="margin:8px 0 0">Tap ▸ to open a deck and pick single sub-decks. Or tick the checkbox to select the whole deck with all its sub-decks.</p>
+    <ul class="howto">
+      <li><span class="big-arrow">▶</span> Press arrow to expand</li>
+      <li><span class="big-arrow">☑</span> Click box to select</li>
+      <li>If a top deck is selected, all its sub-decks are included</li>
+      <li>Enjoy:</li>
+    </ul>
     <div class="row" style="margin-top:12px">
       <button id="allBtn" class="ghost">Select all</button>
       <button id="noneBtn" class="ghost">Deselect all</button>
@@ -138,6 +147,7 @@
     </div>
   </section>
 </main>
+<div class="version">v1.6</div>
 
 <script>
 const REPO = "Waldmann-dev/Anki-Chinesisch";
@@ -188,12 +198,25 @@ async function loadDecks(){
   const tree = await treeRes.json();
   const tsvPaths = tree.tree.filter(t => t.type === "blob" && t.path.endsWith("/cards.tsv")).map(t => t.path).sort();
   decks = [];
+  const skipped = [];
   for (const p of tsvPaths){
-    const res = await fetch(rawUrl(p));
-    if (!res.ok) throw new Error(`Could not load ${p} (${res.status})`);
-    const cards = parseTSV(await res.text(), p);
-    const dir = p.replace(/\/cards\.tsv$/, "");
-    decks.push({ path: dir, label: dir.split("/").join(" :: "), parts: dir.split("/"), cards });
+    try {
+      const res = await fetch(rawUrl(p));
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const dir = p.replace(/\/cards\.tsv$/, "");
+      const cards = parseTSV(await res.text(), dir);
+      decks.push({ path: dir, label: dir.split("/").join(" :: "), parts: dir.split("/"), cards });
+    } catch (e) {
+      // One file may 404 while the repo is being restructured — skip it,
+      // load everything else, and warn instead of failing the whole page.
+      skipped.push(p);
+    }
+  }
+  if (decks.length === 0) throw new Error("No decks could be loaded from GitHub.");
+  if (skipped.length) {
+    $("status").innerHTML = "";
+    const w = el("div", "error", `Note: ${skipped.length} deck(s) could not be loaded right now (repo may be mid-update) — press Reload to try again.`);
+    $("status").appendChild(w);
   }
   decks.sort((a,b) => a.path.localeCompare(b.path));
   buildTree();
