@@ -1,47 +1,56 @@
-Chinese	Pinyin	English	Example (Chinese)	Example (Pinyin)	Example (English)
-妈	mā	1st tone – high flat, steady high pitch (like singing one high note)	妈妈	māma	mom
-麻	má	2nd tone – rising, low to high (like asking "what?" in English)	麻烦	máfan	trouble
-马	mǎ	3rd tone – falling then rising, low dip (say it low, then up a little)	马上	mǎshàng	right away
-骂	mà	4th tone – falling, high to low, sharp (like a firm "No!")	骂人	mà rén	to scold someone
-吗	ma	Neutral tone – light, short, no tone mark, unstressed	好吗？	Hǎo ma?	Okay?
-你好	nǐ hǎo	3rd-tone sandhi: when two 3rd tones meet, the first becomes 2nd tone	你好！	Nǐ hǎo! (pronounced: ní hǎo)	Hello!
-不是	bú shì	不 changes: bù + 4th tone → bú	不是。	Bú shì.	It is not.
-一个	yí gè	一 changes: yī + 4th tone → yí	一个人。	Yí gè rén.	One person.
-爸	bà	b – like p in "spa" (unaspirated, no puff of air)	爸爸	bàba	dad
-怕	pà	p – like p in "pop" (aspirated, with puff of air)	怕热。	Pà rè.	Afraid of heat.
-妈	mā	m – like m in "mom"	妈妈	māma	mom
-饭	fàn	f – like f in "food"	吃饭。	Chī fàn.	To eat a meal.
-大	dà	d – like t in "star" (unaspirated)	大人。	Dà rén.	Adult.
-他	tā	t – like t in "top" (aspirated)	他好。	Tā hǎo.	He is well.
-你	nǐ	n – like n in "no"	你好。	Nǐ hǎo.	Hello.
-来	lái	l – like l in "love"	来吧。	Lái ba.	Come on.
-高	gāo	g – like k in "sky" (unaspirated)	高兴。	Gāoxìng.	Happy.
-看	kàn	k – like k in "kite" (aspirated)	看书。	Kàn shū.	To read a book.
-好	hǎo	h – like h in "hat", but stronger from the throat	好人。	Hǎo rén.	Good person.
-叫	jiào	j – like j in "jeep", tongue tip behind teeth	叫我。	Jiào wǒ.	Call me.
-去	qù	q – like ch in "cheese", aspirated	去哪？	Qù nǎ?	Where are you going?
-谢	xiè	x – like sh in "she", tongue tip down	谢谢。	Xièxie.	Thank you.
-这	zhè	zh – like j in "judge", tongue curled back	这个。	Zhè gè.	This one.
-吃	chī	ch – like ch in "church", tongue curled back, aspirated	吃米饭。	Chī mǐfàn.	To eat rice.
-是	shì	sh – like sh in "shirt", tongue curled back	是的。	Shì de.	Yes.
-人	rén	r – like r in "run", tongue curled back	中国人。	Zhōngguó rén.	Chinese person.
-在	zài	z – like ds in "kids"	在家。	Zài jiā.	At home.
-菜	cài	c – like ts in "cats", aspirated	菜很好。	Cài hěn hǎo.	The dish is very good.
-三	sān	s – like s in "sun"	三个人。	Sān gè rén.	Three people.
-要	yào	y – like y in "yes"	要水。	Yào shuǐ.	Want water.
-我	wǒ	w – like w in "we"	我是。	Wǒ shì.	I am.
-爸	bà	a – "ah" as in "father"	爸爸。	Bàba.	Dad.
-波	bō	o – "oh" as in "go"	波浪。	Bōlàng.	Wave.
-歌	gē	e – "uh" as in "her" (without r)	唱歌。	Chàng gē.	To sing a song.
-你	nǐ	i – "ee" as in "see"	你好。	Nǐ hǎo.	Hello.
-不	bù	u – "oo" as in "food"	不要。	Bú yào.	Do not want.
-女	nǚ	ü – round your lips for "oo" but say "ee"	女人。	Nǚrén.	Woman.
-爱	ài	ai – "eye" as in "I"	爱你。	Ài nǐ.	Love you.
-杯	bēi	ei – "ay" as in "say"	一杯水。	Yì bēi shuǐ.	A glass of water.
-好	hǎo	ao – "ow" as in "cow"	你好。	Nǐ hǎo.	Hello.
-够	gòu	ou – "oh" as in "go" + "oo"	够了。	Gòu le.	Enough.
-安	ān	an – "ahn"	平安。	Píng'ān.	Safe and sound.
-门	mén	en – "un" as in "fun"	门口。	Ménkǒu.	Doorway.
-忙	máng	ang – "ahng", open a	很忙。	Hěn máng.	Very busy.
-更	gèng	eng – "ung" as in "sung"	更好。	Gèng hǎo.	Even better.
-中	zhōng	ong – "oong"	中国。	Zhōngguó.	China.
+Question	Answer	Example
+What are the 3 parts of a Chinese syllable?	Initial + Final + Tone	hǎo = h + ao + 3rd tone
+What is shēngmǔ (声母)?	Initial – consonant at start of syllable	h in hǎo
+What is yùnmǔ (韵母)?	Final – rest of syllable after initial	ao in hǎo
+What is shēngdiào (声调)?	Tone – pitch pattern of syllable	3rd tone in hǎo
+Can a syllable have no initial?	Yes	ai has no initial
+Can a syllable have no final?	No – final is mandatory	–
+How many initials / finals / tones in Mandarin?	21 initials, 38 finals, 4 tones	+ neutral tone
+What are the initials b, p, m, f?	b, p, m = bilabial; f = labiodental; like English	–
+What is the difference between b and p?	Same place; b unaspirated, p aspirated	bà (dad) vs pà (to fear)
+What are the initials d, t, n, l?	Alveolar; like English	–
+What is the difference between d and t?	Same place; d unaspirated, t aspirated	dà (big) vs tā (he)
+What are the 6 simple finals?	a, o, e, i, u, ü	–
+How are bo, po, mo, fo pronounced?	With short u: buo, puo, muo, fuo	bo → buo
+How do you pronounce final e?	Tongue like for o, lips flattened + opened like a smile; like "uh" in "her"	gē (song)
+How do you pronounce final ü?	Tongue like for i, lips rounded	nǚ (woman)
+Why do tones matter in Chinese?	Chinese is tonal; different tone = different meaning	bā vs bà
+What are the 4 tones?	1st high-flat, 2nd rising, 3rd falling-rising, 4th falling	–
+What are the tone values?	1st 55, 2nd 35, 3rd 214, 4th 51	–
+What are the tone marks?	1st —, 2nd /, 3rd v, 4th \	mā, má, mǎ, mà
+What does ba mean in the 4 tones?	bā eight, bá to pull out, bǎ target, bà dad	–
+Where is the tone mark if there is only 1 vowel?	Directly over that vowel	lù
+Where is the tone mark if there are 2+ vowels?	Over the vowel with the widest mouth opening	hǎo (over a)
+What is the mouth-opening order for tone marks?	a > o > e > i > u > ü	a is largest
+What happens to the dot when the tone mark is over i?	Dot is replaced by the tone mark	nǐ, píng
+What is the neutral tone?	Weak, short, no tone mark	māma, bàba
+Give examples of the neutral tone.	māma mom, bóbo uncle, nǐmen you (plural), bàba dad	–
+What are the initials g, k, h?	Velar; back of tongue raised to soft palate	–
+What is the difference between g and k?	Same place; g unaspirated, k aspirated	gāo (tall) vs kàn (to look)
+How do you pronounce h?	Back of tongue raised toward palate; strong h	hǎo (good)
+What are the diphthongs ai, ei, ao, ou?	Main vowel + secondary vowel; tone mark on main vowel	–
+How do you pronounce diphthongs?	Main vowel longer, clearer, louder; secondary vowel short, weak	–
+How do you pronounce ei / ou?	ei like "ay" in "day"; ou like "o" in "gold"	bēi (cup), gòu (enough)
+What are the nasal finals an, en, ang, eng, ong?	Ending in -n = front nasal; ending in -ng = back nasal	–
+How do you pronounce a front nasal final?	Vowel first, then n in the same breath	an like in "an"
+How do you pronounce a back nasal final?	Vowel first, then ng in the same breath	ang like "ng" in "sing"
+How is the 3rd tone pronounced alone?	Full 3rd tone	nǐ, hǎo, mǎ, nǚ
+What happens with 3rd + 3rd tone?	First becomes 2nd tone; tone mark stays unchanged	nǐ hǎo → ní hǎo
+Give examples of 3rd + 3rd tone sandhi.	hěn hǎo → hén hǎo; yǔfǎ → yúfǎ; kěyǐ → kéyǐ	–
+What happens with 3rd + 1st / 2nd / 4th / neutral?	First becomes half-3rd (fall only, no rise)	hěn gāo, hěn bái, hěn dà, nǎinai
+What are the initials zh, ch, sh, r?	Retroflex; tongue tip curled up	–
+How do you pronounce zh / ch / sh / r?	zh like j in "jungle" (unaspirated); ch like ch in "church" (aspirated); sh like sh in "school"; r like r in "rock"	zhè, chī, shì, rén
+What is the final -i in zhi, chi, shi, ri?	-i [ɿ], not simple i [i]; tongue does not move after the initial	zhi, chi, shi, ri
+What are the u-finals?	Glide u + main vowel OR glide u + nasal final	ua, uo, uai, uei, uan, uen, uang, ueng
+How do you pronounce u-finals?	Say u first, then glide naturally to the rest	guā, huì
+How is yī pronounced alone / at the end / as ordinal?	1st tone: yī	yī (one)
+What happens with yī + 1st / 2nd / 3rd tone?	Becomes 4th tone: yì	yì bēi, yì píng, yì běn
+What happens with yī + 4th tone?	Becomes 2nd tone: yí	yí biàn (once)
+Pinyin spelling: i alone → ?	yi; in → yin; ing → ying	i → yi
+Pinyin spelling: diphthong starting with i as own syllable?	i → y	ia → ya, ie → ye, ian → yan
+Pinyin spelling: u alone → ?	wu	u → wu
+Pinyin spelling: diphthong starting with u as own syllable?	u → w	ua → wa, uan → wan
+Pinyin spelling: ü alone / diphthong starting with ü?	Add y, drop the dots	ü → yu, üe → yue, üan → yuan
+When do you use an apostrophe in Pinyin?	In multi-syllable words, if a syllable starts with a, o, e, put ' before the vowel	Tiān'ān Mén, Xī'ōu, tiān'é
+What are the 4 groups of initials?	Labial b, p, m, f; Alveolar d, t, n, l; Velar g, k, h; Retroflex zh, ch, sh, r	–
+What are the finals (overview)?	Simple: a, o, e, i, u, ü, -i[ɿ]; Diphthongs/nasals: ai, ei, ao, ou, an, en, ang, eng, uai, uei, uan, uen, uang, ueng, ong	–
