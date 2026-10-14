@@ -60,12 +60,15 @@
   .wrong details{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin:8px 0}
   .wrong summary{cursor:pointer;font-weight:650}
   .wrong .ans{margin-top:8px;white-space:pre-wrap}
+  .howto-box{background:#faf7f0;border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-top:10px}
   .howto{list-style:none;margin:10px 0 0;padding:0;font-size:18px;line-height:1.55}
   .howto li{margin:8px 0}
   .howto .big-arrow{font-size:26px;vertical-align:-2px}
   .treerow{display:flex;gap:8px;align-items:center}
   button.toggle{background:#eee9df;border:1px solid var(--line);border-radius:10px;padding:10px 12px;min-width:56px;min-height:56px;cursor:pointer;font-size:28px;line-height:1;color:var(--ink);flex:none}
   ul.collapsed{display:none}
+  footer{max-width:760px;margin:24px auto 0;padding:0 16px 56px;color:var(--muted);font-size:14px}
+  footer a{color:inherit}
   .version{position:fixed;right:12px;bottom:12px;z-index:50;background:#eee9df;border:1px solid var(--line);border-radius:999px;padding:4px 10px;font-size:12px;color:var(--muted)}
   #status{margin-top:12px}
   .error{background:#fdecea;border:1px solid #f5c6c0;border-radius:10px;padding:12px 14px}
@@ -75,8 +78,7 @@
 <body>
 <header>
   <h1>🇨🇳 Chinese Flashcards</h1>
-  <p class="sub">Anki-style quiz. Cards load <strong>live</strong> from the GitHub repo — no copy, no algorithm. Each card comes up exactly once per round.<br>
-  <span class="small">Source: <a href="https://github.com/Waldmann-dev/Anki-Chinesisch" target="_blank" rel="noopener">Waldmann-dev/Anki-Chinesisch</a> · <span id="loadedAt">loading…</span> · <button id="reloadBtn" class="ghost" style="padding:6px 10px;font-size:13px">↻ Reload from GitHub</button></span></p>
+  <p style="margin:12px 0 0"><button id="reloadBtn" class="ghost" style="padding:6px 10px;font-size:13px">↻ Reload from GitHub</button></p>
 </header>
 
 <main>
@@ -86,12 +88,12 @@
       <h2 style="margin:0;font-size:19px">1. Choose decks</h2>
       <span class="muted" id="totalLabel"></span>
     </div>
-    <ul class="howto">
+    <div class="howto-box"><ul class="howto">
       <li><span class="big-arrow">▶</span> Press arrow to expand</li>
       <li><span class="big-arrow">☑</span> Click box to select</li>
       <li>If a top deck is selected, all its sub-decks are included</li>
-      <li>Enjoy:</li>
-    </ul>
+      <li>Enjoy!</li>
+    </ul></div>
     <div class="row" style="margin-top:12px">
       <button id="allBtn" class="ghost">Select all</button>
       <button id="noneBtn" class="ghost">Deselect all</button>
@@ -147,7 +149,11 @@
     </div>
   </section>
 </main>
-<div class="version">v1.6</div>
+<footer>
+  <p>Anki-style quiz. Cards load <strong>live</strong> from the <a href="https://github.com/Waldmann-dev/Anki-Chinesisch" target="_blank" rel="noopener">GitHub repo</a> — no copy, no algorithm. Each card comes up exactly once per round.</p>
+  <p class="muted small">Source: <a href="https://github.com/Waldmann-dev/Anki-Chinesisch" target="_blank" rel="noopener">Waldmann-dev/Anki-Chinesisch</a> · <span id="loadedAt">loading…</span></p>
+</footer>
+<div class="version">v1.7</div>
 
 <script>
 const REPO = "Waldmann-dev/Anki-Chinesisch";
