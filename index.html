@@ -156,7 +156,7 @@
   <p>Anki-style quiz. Cards load <strong>live</strong> from the <a href="https://github.com/Waldmann-dev/Anki-Chinesisch" target="_blank" rel="noopener">GitHub repo</a> — no copy, no algorithm. Each card comes up exactly once per round.</p>
   <p class="muted small">Source: <a href="https://github.com/Waldmann-dev/Anki-Chinesisch" target="_blank" rel="noopener">Waldmann-dev/Anki-Chinesisch</a> · <span id="loadedAt">loading…</span></p>
 </footer>
-<div class="version">v2.7</div>
+<div class="version">v2.8</div>
 
 <script>
 const REPO = "Waldmann-dev/Anki-Chinesisch";
@@ -288,7 +288,15 @@ function renderNode(node, path){
   const li = document.createElement("li");
   const row = el("div", "treerow");
   const tgl = document.createElement("button");
-  const open0 = !path.includes("/"); // top-level folder: start expanded
+  const depth = path.split("/").length;
+  const open0 = depth === 1; // top-level folder: start expanded
+  // Arrow box shrinks per level: 42 / 38 / 32px (glyph stays 28px,
+  // level 3+ just fits around it). Padding shrinks with it.
+  const boxSize = depth === 1 ? 42 : depth === 2 ? 38 : 32;
+  const boxPad = depth === 1 ? 6 : depth === 2 ? 4 : 1;
+  tgl.style.minWidth = boxSize + "px";
+  tgl.style.minHeight = boxSize + "px";
+  tgl.style.padding = boxPad + "px";
   tgl.type = "button"; tgl.className = "toggle"; tgl.textContent = open0 ? "▾" : "▸";
   tgl.setAttribute("aria-label", "Expand sub-decks"); tgl.setAttribute("aria-expanded", String(open0));
   const fcb = document.createElement("input");
