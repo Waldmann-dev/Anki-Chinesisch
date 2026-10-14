@@ -152,7 +152,7 @@
   <p>Anki-style quiz. Cards load <strong>live</strong> from the <a href="https://github.com/Waldmann-dev/Anki-Chinesisch" target="_blank" rel="noopener">GitHub repo</a> — no copy, no algorithm. Each card comes up exactly once per round.</p>
   <p class="muted small">Source: <a href="https://github.com/Waldmann-dev/Anki-Chinesisch" target="_blank" rel="noopener">Waldmann-dev/Anki-Chinesisch</a> · <span id="loadedAt">loading…</span></p>
 </footer>
-<div class="version">v1.8</div>
+<div class="version">v1.9</div>
 
 <script>
 const REPO = "Waldmann-dev/Anki-Chinesisch";
@@ -352,32 +352,7 @@ function updateSelectionLabel(){
 }
 
 // ---------- quiz ----------
-// Summary of the current selection for the quiz header, e.g.
-// "000. Vocabulary (all)" or "00. Pinyin: 01. Bilabial and Labiodental, Own cards".
-// Shows top decks + sub-decks, never file paths.
-function selectionSummary(){
-  const sel = selectedDecks();
-  if (sel.length === 0) return "";
-  if (sel.length === decks.length) return "Decks: all decks";
-  const short = (path) => path.replace(/^Chinese\//, "");
-  const groups = new Map();
-  for (const d of sel){
-    const parts = short(d.path).split("/");
-    const top = parts[0];
-    const sub = parts.length > 1 ? parts.slice(1).join(" / ") : "Own cards";
-    if (!groups.has(top)) groups.set(top, []);
-    groups.get(top).push(sub);
-  }
-  const bits = [];
-  for (const [top, subs] of groups){
-    const allUnder = decks.filter(dd => short(dd.path).split("/")[0] === top);
-    const selUnder = sel.filter(dd => short(dd.path).split("/")[0] === top);
-    bits.push(selUnder.length === allUnder.length ? `${top} (all)` : `${top}: ${subs.join(", ")}`);
-  }
-  return "Decks: " + bits.join(" \u00b7 ");
-}
 function startRound(cardList, meta){
-  $("qSelection").textContent = selectionSummary();
   queue = cardList.slice();
   const order = document.querySelector("input[name=order]:checked").value;
   if (order === "random") shuffle(queue);
@@ -388,8 +363,15 @@ function startRound(cardList, meta){
   $("quizView").classList.remove("hidden");
   showCard();
 }
+// Deck label for one card, e.g. "Chinese Grammar / 00. Pinyin / 09. Nasal Finals".
+// card.deck holds the deck folder path; the leading "Chinese/" is dropped.
+function cardDeckLabel(card){
+  const short = (card.deck || "").replace(/^Chinese\//, "");
+  return short.split("/").join(" / ") || "Unknown deck";
+}
 function showCard(){
   const card = queue[idx];
+  $("qSelection").textContent = "Deck: " + cardDeckLabel(card);
   $("qCounter").textContent = `Card ${idx+1} of ${queue.length}`;
   $("qScore").textContent = `✓ ${correct} · ✗ ${wrongCards.length}`;
   $("qBar").style.width = (idx / queue.length * 100) + "%";
@@ -399,9 +381,10 @@ function showCard(){
   $("qAnswer").innerHTML = ""; $("qExample").innerHTML = "";
   if (card.type === "qa"){
     $("qFront").className = "front"; $("qFront").textContent = card.q;
-    $("qHint").textContent = "Think of the answer, then reveal it.";
+    $("qHint").classList.add("hidden");
   } else {
     $("qFront").className = "front big"; $("qFront").textContent = card.zh;
+    $("qHint").classList.remove("hidden");
     $("qHint").textContent = "What is the Pinyin and the English meaning?";
   }
   window.scrollTo({ top: 0, behavior: "smooth" });
