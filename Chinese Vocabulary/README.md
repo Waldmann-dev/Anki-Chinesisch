@@ -8,4 +8,4 @@ Vocab, in 3 directions (currently empty, 0 cards):
 - 03. Character and Pinyin to English – Front: Character + Pinyin, Back: English
 
 Lessons (flat, no sub-subdecks):
-- 04. Lesson 1 - Good Day – 23 cards (Front: Character + Pinyin, Back: English)
+- 04. Lesson 1 - Good Day – 21 cards (Front: Character + Pinyin, Back: English)
