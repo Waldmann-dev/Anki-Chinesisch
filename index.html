@@ -60,8 +60,8 @@
   .wrong details{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin:8px 0}
   .wrong summary{cursor:pointer;font-weight:650}
   .wrong .ans{margin-top:8px;white-space:pre-wrap}
-  .treerow{display:flex;gap:2px;align-items:flex-start}
-  button.toggle{background:none;border:0;padding:6px 4px;cursor:pointer;font-size:13px;line-height:1.5;color:var(--muted)}
+  .treerow{display:flex;gap:8px;align-items:center}
+  button.toggle{background:#eee9df;border:1px solid var(--line);border-radius:10px;padding:10px 12px;min-width:48px;min-height:48px;cursor:pointer;font-size:24px;line-height:1;color:var(--ink);flex:none}
   ul.collapsed{display:none}
   #status{margin-top:12px}
   .error{background:#fdecea;border:1px solid #f5c6c0;border-radius:10px;padding:12px 14px}
@@ -102,10 +102,13 @@
   </section>
 
   <!-- QUIZ -->
-  <section id="quizView" class="box hidden">
+  <section id="quizView" class="hidden">
+    <button id="quitBtn" class="primary wide" style="font-size:18px;padding:16px">← Back to deck selection</button>
+    <p class="muted small" style="margin:12px 4px 10px">Your progress in this round is discarded if you go back.</p>
+    <p id="qSelection" style="margin:0 4px 12px;font-weight:650"></p>
+    <div class="box">
     <div class="topline"><span id="qCounter"></span><span id="qScore"></span></div>
     <div class="progress"><div id="qBar"></div></div>
-    <div class="decklabel" id="qDeck"></div>
     <div class="front" id="qFront"></div>
     <p class="hint" id="qHint"></p>
     <div id="answerWrap" class="answer hidden">
@@ -117,7 +120,7 @@
       <button id="wrongBtn" class="bad">✗ Wrong <span style="font-weight:400">(←)</span></button>
       <button id="rightBtn" class="good">✓ Correct <span style="font-weight:400">(→)</span></button>
     </div>
-    <p class="muted small" style="margin:14px 0 0"><button id="quitBtn" class="ghost" style="padding:6px 10px;font-size:13px">← Back to deck selection</button> &nbsp; Your progress in this round is discarded.</p>
+    </div>
   </section>
 
   <!-- RESULTS -->
@@ -206,10 +209,10 @@ async function loadDecks(){
 // (e.g. 00. Pinyin) gets a folder row + a separate "own cards" deck row,
 // so unchecking one sub-deck never silently drops the 20 own cards.
 function buildTree(){
-  treeRoot = { name: "Chinese", children: new Map(), deck: null };
+  treeRoot = { name: "", children: new Map(), deck: null };
   for (const d of decks){
     let node = treeRoot;
-    for (let i = 1; i < d.parts.length; i++){
+    for (let i = 0; i < d.parts.length; i++){
       const part = d.parts[i];
       if (!node.children.has(part)) node.children.set(part, { name: part, children: new Map(), deck: null });
       node = node.children.get(part);
@@ -227,7 +230,7 @@ function deckCheckbox(path){
 function renderTree(){
   const wrap = $("treeWrap"); wrap.innerHTML = "";
   const ul = el("ul", "tree");
-  for (const child of treeRoot.children.values()) ul.appendChild(renderNode(child, "Chinese/" + child.name));
+  for (const child of treeRoot.children.values()) ul.appendChild(renderNode(child, child.name));
   wrap.appendChild(ul);
   syncCheckboxes();
 }
@@ -319,7 +322,32 @@ function updateSelectionLabel(){
 }
 
 // ---------- quiz ----------
+// Summary of the current selection for the quiz header, e.g.
+// "000. Vocabulary (all)" or "00. Pinyin: 01. Bilabial and Labiodental, Own cards".
+// Shows top decks + sub-decks, never file paths.
+function selectionSummary(){
+  const sel = selectedDecks();
+  if (sel.length === 0) return "";
+  if (sel.length === decks.length) return "Decks: all decks";
+  const short = (path) => path.replace(/^Chinese\//, "");
+  const groups = new Map();
+  for (const d of sel){
+    const parts = short(d.path).split("/");
+    const top = parts[0];
+    const sub = parts.length > 1 ? parts.slice(1).join(" / ") : "Own cards";
+    if (!groups.has(top)) groups.set(top, []);
+    groups.get(top).push(sub);
+  }
+  const bits = [];
+  for (const [top, subs] of groups){
+    const allUnder = decks.filter(dd => short(dd.path).split("/")[0] === top);
+    const selUnder = sel.filter(dd => short(dd.path).split("/")[0] === top);
+    bits.push(selUnder.length === allUnder.length ? `${top} (all)` : `${top}: ${subs.join(", ")}`);
+  }
+  return "Decks: " + bits.join(" \u00b7 ");
+}
 function startRound(cardList, meta){
+  $("qSelection").textContent = selectionSummary();
   queue = cardList.slice();
   const order = document.querySelector("input[name=order]:checked").value;
   if (order === "random") shuffle(queue);
@@ -335,8 +363,6 @@ function showCard(){
   $("qCounter").textContent = `Card ${idx+1} of ${queue.length}`;
   $("qScore").textContent = `✓ ${correct} · ✗ ${wrongCards.length}`;
   $("qBar").style.width = (idx / queue.length * 100) + "%";
-  const deck = decks.find(d => d.path === card.deck);
-  $("qDeck").textContent = deck ? deck.label : card.deck;
   $("answerWrap").classList.add("hidden");
   $("revealRow").classList.remove("hidden");
   $("gradeRow").classList.add("hidden");
