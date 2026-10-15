@@ -205,7 +205,13 @@ function parseTSV(text, path){
 // ---------- loading live from GitHub ----------
 async function loadDecks(){
   $("status").innerHTML = "";
-  $("treeWrap").innerHTML = "<p class='muted'>Loading decks from GitHub…</p>";
+  $("treeWrap").innerHTML = "<p class='muted' id='loadLabel'>Connecting to GitHub…</p><div class='progress'><div id='loadBar'></div></div><p class='muted small' id='loadCount'></p>";
+  const setProgress = (done, total) => {
+    $("loadBar").style.width = (total ? Math.round(done / total * 100) : 0) + "%";
+    $("loadLabel").textContent = total ? "Loading decks from GitHub…" : "Connecting to GitHub…";
+    $("loadCount").textContent = total ? `${done} of ${total} decks loaded · ${total - done} left` : "";
+  };
+  setProgress(0, 0);
   $("startBtn").disabled = true;
   const treeRes = await fetch(TREE_URL, { headers: { "Accept": "application/vnd.github+json" } });
   if (!treeRes.ok) throw new Error(`GitHub API ${treeRes.status} — try again in a minute (rate limit?)`);
@@ -213,6 +219,8 @@ async function loadDecks(){
   const tsvPaths = tree.tree.filter(t => t.type === "blob" && t.path.endsWith("/cards.tsv")).map(t => t.path).sort();
   decks = [];
   const skipped = [];
+  let done = 0;
+  setProgress(0, tsvPaths.length);
   for (const p of tsvPaths){
     try {
       const res = await fetch(rawUrl(p));
@@ -225,6 +233,8 @@ async function loadDecks(){
       // load everything else, and warn instead of failing the whole page.
       skipped.push(p);
     }
+    done++;
+    setProgress(done, tsvPaths.length);
   }
   if (decks.length === 0) throw new Error("No decks could be loaded from GitHub.");
   if (skipped.length) {
