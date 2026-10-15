@@ -50,7 +50,7 @@
   .answer .a{font-size:20px;font-weight:650;white-space:pre-wrap;overflow-wrap:anywhere}
   .answer .pinyin{font-size:28px;font-weight:700}
   .answer .eng{font-size:20px;margin-top:4px}
-  .example{margin-top:14px;background:#faf7f0;border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+  .example{margin-top:14px;background:#faf7f0;border:1px solid var(--line);border-radius:10px;padding:12px 14px}   .audio-row{margin-top:8px;display:flex;gap:8px;flex-wrap:wrap}   .audio-btn{border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 14px;font-size:18px;cursor:pointer;line-height:1}   .audio-btn:active{transform:scale(.96)}   .audio-btn[disabled]{opacity:.5;cursor:default}
   .example .zh{font-size:22px}
   .example .py{color:var(--muted)}
   .grade{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
@@ -175,6 +175,11 @@ let idx = 0, correct = 0, wrongCards = [];
 const $ = (id) => document.getElementById(id);
 const el = (tag, cls, text) => { const n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; };
 const isDash = (s) => s == null || s.trim() === "" || s.trim() === "–" || s.trim() === "-";
+const AUDIO_BASE = `https://raw.githubusercontent.com/${REPO}/${BRANCH}/audio/Elevenlabs/Lektion1/`;
+function soundFiles(text){ const out = []; if (!text) return out; const re = /\[sound:([^\]]+)\]/g; let m; while ((m = re.exec(text))) out.push(m[1].trim()); return out; }
+function stripSoundTags(text){ return (text || "").replace(/\[sound:[^\]]+\]/g, "").replace(/\s+/g, " ").trim(); }
+function audioButton(filename){ const b = document.createElement("button"); b.className = "audio-btn"; b.type = "button"; b.textContent = "🔊"; b.title = "Play " + filename; b.addEventListener("click", (ev) => { ev.stopPropagation(); try { const a = new Audio(AUDIO_BASE + encodeURIComponent(filename)); a.play().catch(() => { b.disabled = true; b.title = "Audio not available"; }); } catch (e) { b.disabled = true; } }); return b; }
+function appendExampleWithAudio(container, exampleText){ const files = soundFiles(exampleText); const clean = stripSoundTags(exampleText); if (clean) container.appendChild(el("div", "", clean)); if (files.length){ const row = document.createElement("div"); row.className = "audio-row"; for (const f of files) row.appendChild(audioButton(f)); container.appendChild(row); } }
 function shuffle(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
 
 // ---------- TSV parsing ----------
@@ -424,7 +429,7 @@ function reveal(){
     if (!isDash(card.ex)){
       const ex = el("div", "example");
       ex.appendChild(el("div", "small muted", "Example"));
-      ex.appendChild(el("div", "", card.ex));
+      appendExampleWithAudio(ex, card.ex);
       $("qExample").appendChild(ex);
     }
   } else {
@@ -466,7 +471,7 @@ function showResults(){
       sum.textContent = card.type === "qa" ? card.q : `${card.zh} — ${card.pinyin} — ${card.en}`;
       det.appendChild(sum);
       const ans = el("div", "ans");
-      if (card.type === "qa") ans.textContent = card.a + (!isDash(card.ex) ? `\nExample: ${card.ex}` : "");
+      if (card.type === "qa") ans.textContent = card.a + (!isDash(card.ex) ? `\nExample: ${stripSoundTags(card.ex)}` : "");
       else ans.textContent = `${card.pinyin}\n${card.en}` + (!isDash(card.exZh) ? `\nExample: ${card.exZh} (${card.exPy}) — ${card.exEn}` : "");
       det.appendChild(ans);
       wrap.appendChild(det);
