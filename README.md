@@ -12,7 +12,7 @@ The quiz loads all `cards.tsv` live from this repo. Cards with audio show a 🔊
 
 ## Anki Package (.apkg) – One File, Everything Included
 
-Download **[Anki-Chinesisch.apkg](Anki-Chinesisch.apkg)** (196 cards + 127 card audios + 10 tongue diagrams), double-click / import in Anki – cards + audio + images come in together, no separate file copying needed.
+Download **[Anki-Chinesisch.apkg](Anki-Chinesisch.apkg)** (223 cards + 127 card audios + 10 tongue diagrams), double-click / import in Anki – cards + audio + images come in together, no separate file copying needed.
 
 (Alternative: import the individual `cards.tsv` + copy MP3s flat into `collection.media`, see Audio below.)
 
@@ -21,14 +21,16 @@ Download **[Anki-Chinesisch.apkg](Anki-Chinesisch.apkg)** (196 cards + 127 card 
 Structure mirrors Anki: each subdeck is a numbered folder, like in the Anki deck overview.
 
 - `Chinese Vocabulary` (top-level)
-  - `01. Lesson 1 - Hello` – 27 cards (Front: Character + Pinyin, Back: English)
+  - `01. Lesson 1 - Hello` – 54 cards in two directions (no own cards, only subdecks)
+    - `01. Chinese to English` (27) – Front: Character + Pinyin, Back: English
+    - `02. English to Chinese` (27) – Front: English, Back: Character + Pinyin (same audio)
 - `Chinese Grammar`
   - `00. Pinyin` – no own cards, only subdecks (71 cards total)
     - `00. Pinyin Basics` (20), `01. Bilabial and Labiodental` (6), `02. Alveolar` (5), `03. Velar` (4), `04. Retroflex` (5), `05. Palatal` (5), `06. Dental` (4), `07. Simple Finals` (7), `08. Diphthongs` (6), `09. Nasal Finals` (5), `10. Glide Finals` (4)
   - `01. Phonetic Foundations` – no own cards, only subdecks (98 cards total)
     - `01. Syllables, Initials, Finals, Tones, Neutral Tone` (53), `02. Initials, Diphthongs, Nasals, 3rd-Tone Sandhi` (14), `03. Initials, -i, u-Finals` (4), `04. yī-Sandhi, Spelling, Characters` (27)
 
-Total: 196 cards. Flat rule: a subdeck is the deepest level, no sub-subdecks, cards directly in the subdeck.
+Total: 223 cards (169 Grammar + 54 Vocabulary). Flat rule: a subdeck is the deepest level, no sub-subdecks, cards directly in the subdeck – EXCEPTION: Vocabulary has two direction subdecks (Chinese → English, English → Chinese).
 
 Pronunciation cards ask *how* to pronounce a group of sounds (e.g. "How do you pronounce the bilabials?", "How do you pronounce the fricatives?"), not *which* sounds belong to a group – place-classification cards ("Which initials are bilabial?" etc.) were removed on purpose. "How do you pronounce X?" cards use the letter's own audio (e.g. `[sound:initial_p.mp3]` = pō), not a whole-word example.
 
@@ -36,8 +38,8 @@ Pronunciation cards ask *how* to pronounce a group of sounds (e.g. "How do you p
 
 - `Chinese Grammar` (Pinyin + Phonetic Foundations): Q&A knowledge recall (no exercises).
   Columns: `Question | Answer | Example`
-- `Chinese Vocabulary`: vocabulary.
-  Columns: `Question | Answer | Example` (Question = Character + Pinyin, Answer = English)
+- `Chinese Vocabulary`: vocabulary, two directions.
+  Columns: `Question | Answer | Example` (`01. Chinese to English`: Question = Character + Pinyin, Answer = English; `02. English to Chinese`: Question = English, Answer = Character + Pinyin)
 
 Example column: Chinese character + Pinyin + English in parentheses, e.g. `你好 nǐ hǎo (hello)`. One example per card if sensible, else `–`.
 
