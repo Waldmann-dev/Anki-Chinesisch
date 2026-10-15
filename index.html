@@ -439,7 +439,17 @@ function reveal(){
   $("revealRow").classList.add("hidden");
   $("gradeRow").classList.remove("hidden");
   if (card.type === "qa"){
-    const a = el("div", "a", ""); appendAnswerText(a, card.a); $("qAnswer").appendChild(a);
+    const a = el("div", "a", "");
+    // Backwards vocab (English to Chinese): Answer is "CHARACTER PINYIN" – split like the forwards Front.
+    const bm = (card.deck && card.deck.includes("English to Chinese")) ? card.a.match(/^([\u4e00-\u9fff]+)\s+(.+)$/) : null;
+    if (bm){
+      const zh = document.createElement("div"); zh.className = "front-zh"; zh.textContent = bm[1];
+      const py = document.createElement("div"); py.className = "front-py"; py.textContent = bm[2];
+      a.appendChild(zh); a.appendChild(py);
+    } else {
+      appendAnswerText(a, card.a);
+    }
+    $("qAnswer").appendChild(a);
     if (!isDash(card.ex)){
       const ex = el("div", "example");
       ex.appendChild(el("div", "small muted", "Example"));
