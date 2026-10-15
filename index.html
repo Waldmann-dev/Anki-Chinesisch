@@ -179,7 +179,7 @@ const AUDIO_BASE = `https://raw.githubusercontent.com/${REPO}/${BRANCH}/audio/El
 function soundFiles(text){ const out = []; if (!text) return out; const re = /\[sound:([^\]]+)\]/g; let m; while ((m = re.exec(text))) out.push(m[1].trim()); return out; }
 function stripSoundTags(text){ return (text || "").replace(/\[sound:[^\]]+\]/g, "").replace(/\s+/g, " ").trim(); }
 function audioButton(filename){ const b = document.createElement("button"); b.className = "audio-btn"; b.type = "button"; b.textContent = "🔊"; b.title = "Play " + filename; b.addEventListener("click", (ev) => { ev.stopPropagation(); try { const a = new Audio(AUDIO_BASE + encodeURIComponent(filename)); a.play().catch(() => { b.disabled = true; b.title = "Audio not available"; }); } catch (e) { b.disabled = true; } }); return b; }
-function appendExampleWithAudio(container, exampleText){ const files = soundFiles(exampleText); const clean = stripSoundTags(exampleText); if (clean) container.appendChild(el("div", "", clean)); if (files.length){ const row = document.createElement("div"); row.className = "audio-row"; for (const f of files) row.appendChild(audioButton(f)); container.appendChild(row); } }
+function appendExampleWithAudio(container, exampleText){ const files = soundFiles(exampleText); const clean = stripSoundTags(exampleText); if (clean){ const ex = document.createElement("div"); ex.className = "example"; ex.appendChild(el("div", "small muted", "Example")); ex.appendChild(el("div", "", clean)); container.appendChild(ex); } if (files.length){ const row = document.createElement("div"); row.className = "audio-row"; for (const f of files) row.appendChild(audioButton(f)); container.appendChild(row); } }
 function shuffle(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
 
 // ---------- TSV parsing ----------
@@ -437,10 +437,7 @@ function reveal(){
   if (card.type === "qa"){
     const a = el("div", "a", card.a); $("qAnswer").appendChild(a);
     if (!isDash(card.ex)){
-      const ex = el("div", "example");
-      ex.appendChild(el("div", "small muted", "Example"));
-      appendExampleWithAudio(ex, card.ex);
-      $("qExample").appendChild(ex);
+      appendExampleWithAudio($("qExample"), card.ex);
     }
   } else {
     const p = el("div", "pinyin", card.pinyin); $("qAnswer").appendChild(p);
