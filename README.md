@@ -10,6 +10,12 @@ Try the cards in the browser, no Anki needed:
 
 The quiz loads all `cards.tsv` live from this repo. Cards with audio show a 🔊 button (audio loads from the repo).
 
+## Anki Package (.apkg) – One File, Everything Included
+
+Download **[Anki-Chinesisch.apkg](Anki-Chinesisch.apkg)** (200 cards + 81 card audios), double-click / import in Anki – cards + audio come in together, no separate MP3 copying needed.
+
+(Alternative: import the individual `cards.tsv` + copy MP3s flat into `collection.media`, see Audio below.)
+
 ## Structure
 
 Structure mirrors Anki: each subdeck is a numbered folder, like in the Anki deck overview.
