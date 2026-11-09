@@ -12,7 +12,7 @@ The quiz loads all `cards.tsv` live from this repo. Cards with audio show a 🔊
 
 ## Anki Package (.apkg) – One File, Everything Included
 
-Download **[Anki-Chinesisch.apkg](Anki-Chinesisch.apkg)** (223 cards + 127 card audios + 10 tongue diagrams), double-click / import in Anki – cards + audio + images come in together, no separate file copying needed.
+Download **[Anki-Chinesisch.apkg](Anki-Chinesisch.apkg)** (339 cards, audio + images included), double-click / import in Anki – cards + audio + images come in together, no separate file copying needed.
 
 (Alternative: import the individual `cards.tsv` + copy MP3s flat into `collection.media`, see Audio below.)
 
