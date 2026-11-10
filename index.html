@@ -47,15 +47,17 @@
   .front.big{font-size:56px;line-height:1.2}
   .front-zh{font-size:56px;line-height:1.2;font-weight:650}
   .front-py{font-size:30px;line-height:1.3;color:var(--muted);font-weight:500;margin-top:2px}
+  #qFront .front-zh{font-weight:700}
+  #qFront.front.big{font-weight:700}
+  #qAnswer .front-zh{font-weight:400}
   .hint{color:var(--muted);font-size:14px;margin:0 0 14px}
   .answer{border-top:1px solid var(--line);margin-top:16px;padding-top:16px}
-  .answer .a{font-size:20px;font-weight:650;white-space:pre-wrap;overflow-wrap:anywhere}
+  .answer .a{font-size:32px;font-weight:400;white-space:pre-wrap;overflow-wrap:anywhere}
   .answer .pinyin{font-size:28px;font-weight:700}
   .answer .eng{font-size:20px;margin-top:4px}
-  .example{margin-top:14px;background:var(--exbg);border:1px solid var(--line);border-radius:12px;padding:14px 16px}   .example img{max-width:100%;height:auto;display:block;margin:10px 0;border:1px solid var(--line);border-radius:8px;background:#fff}   .audio-row{margin-top:8px;display:flex;gap:8px;flex-wrap:wrap}   .audio-btn{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:10px 16px;min-width:44px;min-height:44px;font-size:18px;cursor:pointer;line-height:1}   .audio-btn:active{transform:scale(.96)}   .audio-btn[disabled]{opacity:.5;cursor:default}   .audio-btn.inline{display:inline-flex;align-items:center;justify-content:center;vertical-align:middle;margin-left:.35em;padding:.05em .2em;font-size:1em;line-height:1;min-width:0;min-height:0}
-  .exlabel{font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
-  .example .zh{font-size:22px;font-weight:600;line-height:1.4}
-  .example .py{color:var(--muted);font-size:17px;line-height:1.45}
+  .audio-btn{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:10px 16px;min-width:44px;min-height:44px;font-size:18px;cursor:pointer;line-height:1}   .audio-btn:active{transform:scale(.96)}   .audio-btn[disabled]{opacity:.5;cursor:default}   .audio-btn.inline{display:inline-flex;align-items:center;justify-content:center;vertical-align:middle;margin-left:.35em;padding:.05em .2em;font-size:1em;line-height:1;min-width:0;min-height:0}
+  .exline{margin-top:12px;color:var(--muted);font-size:15px;line-height:1.55}
+  .exline-zh{font-size:16px}
   .grade{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
   .grade button{padding:14px}
   kbd{background:var(--ghostbg);border:1px solid var(--line);border-bottom-width:2px;border-radius:6px;padding:1px 6px;font-size:12px}
@@ -183,32 +185,26 @@ const el = (tag, cls, text) => { const n = document.createElement(tag); if (cls)
 const isDash = (s) => s == null || s.trim() === "" || s.trim() === "–" || s.trim() === "-";
 const AUDIO_BASE = `https://raw.githubusercontent.com/${REPO}/${BRANCH}/audio/Elevenlabs/Lektion1/`;
 const AUDIO_BASE_ALESSIA = `https://raw.githubusercontent.com/${REPO}/${BRANCH}/audio/Alessia/`;
-const IMAGE_BASE = `https://raw.githubusercontent.com/${REPO}/${BRANCH}/images/`;
 function soundFiles(text){ const out = []; if (!text) return out; const re = /\[sound:([^\]]+)\]/g; let m; while ((m = re.exec(text))) out.push(m[1].trim()); return out; }
 function stripSoundTags(text){ return (text || "").replace(/\[sound:[^\]]+\]/g, "").replace(/\s+/g, " ").trim(); }
-function imageFiles(text){ const out = []; if (!text) return out; const re = /<img\s+src="([^"]+)">/g; let m; while ((m = re.exec(text))) out.push(m[1].trim()); return out; }
 function stripImgTags(text){ return (text || "").replace(/<img\s+src="[^"]+">/g, " ").replace(/\s+/g, " ").trim(); }
 function audioButton(filename, inline){ const b = document.createElement("button"); b.className = inline ? "audio-btn inline" : "audio-btn"; b.type = "button"; b.textContent = "🔊"; b.title = "Play " + filename; b.addEventListener("click", (ev) => { ev.stopPropagation(); try { const a = new Audio(AUDIO_BASE + encodeURIComponent(filename)); a.play().catch(() => { const a2 = new Audio(AUDIO_BASE_ALESSIA + encodeURIComponent(filename)); a2.play().catch(() => { b.disabled = true; b.title = "Audio not available"; }); }); } catch (e) { b.disabled = true; } }); return b; }
-function appendExampleWithAudio(container, exampleText){ const files = soundFiles(exampleText); const imgs = imageFiles(exampleText); const clean = stripSoundTags(stripImgTags(exampleText)); if (clean) container.appendChild(el("div", "", clean)); if (files.length){ const row = document.createElement("div"); row.className = "audio-row"; for (const f of files) row.appendChild(audioButton(f)); container.appendChild(row); } for (const src of imgs){ const im = document.createElement("img"); im.src = IMAGE_BASE + encodeURIComponent(src); im.alt = src; container.appendChild(im); } }
-// One Example box: label + content. A Chinese sentence ("CHARS PINYIN
-// [sound:...]") renders structured (.zh large, .py muted) with its sentence
-// audio; anything else (English sentence, legacy grammar example) falls back
-// to the old text + audio-buttons + images rendering. Returns false when the
-// example is empty/dash, so callers can hide the box entirely.
-function renderExampleBox(container, exampleText){
+// Quiet gray example line, no box, no label. A Chinese sentence ("CHARS PINYIN
+// [sound:...]") renders as Chinese line + pinyin line with its sentence audio;
+// anything else (English sentence) renders as plain gray text, no audio button.
+function renderExampleLine(container, exampleText){
   if (isDash(exampleText)) return false;
-  const box = el("div", "example");
-  box.appendChild(el("div", "exlabel", "Example"));
+  const line = el("div", "exline");
   const m = (exampleText || "").match(/^([\u4e00-\u9fff][\u4e00-\u9fff，。？！、；：]*)\s+(.+?)(\s*\[sound:[^\]]+\])?\s*$/);
   if (m){
-    box.appendChild(el("div", "zh", m[1]));
-    const pyEl = el("div", "py", m[2]);
+    line.appendChild(el("div", "exline-zh", m[1]));
+    const pyEl = el("div", "exline-py", m[2]);
     for (const f of soundFiles(exampleText)) pyEl.appendChild(audioButton(f, true));
-    box.appendChild(pyEl);
+    line.appendChild(pyEl);
   } else {
-    appendExampleWithAudio(box, exampleText);
+    line.appendChild(el("div", "exline-en", stripSoundTags(stripImgTags(exampleText))));
   }
-  container.appendChild(box);
+  container.appendChild(line);
   return true;
 }
 function appendAnswerText(container, text){ const parts = String(text ?? "").split("<br>"); parts.forEach((part, i) => { if (i > 0) container.appendChild(document.createElement("br")); if (part) container.appendChild(document.createTextNode(part)); }); }
@@ -478,7 +474,7 @@ function showCard(){
       frontPy = py;
       $("qFront").appendChild(zh); $("qFront").appendChild(py);
     } else {
-      $("qFront").className = "front"; $("qFront").textContent = card.q;
+      $("qFront").className = "front big"; $("qFront").textContent = card.q;
     }
     $("qHint").classList.add("hidden");
     // Split layout: Chinese->English fronts play the word audio and show the
@@ -487,7 +483,7 @@ function showCard(){
     if (card.ws && card.deck && card.deck.includes("Chinese to English") && frontPy){
       frontPy.appendChild(audioButton(card.ws, true));
     }
-    if (card.exf != null) renderExampleBox($("qFrontExample"), card.exf);
+    if (card.exf != null) renderExampleLine($("qFrontExample"), card.exf);
   } else {
     $("qFront").className = "front big"; $("qFront").textContent = card.zh;
     $("qHint").classList.remove("hidden");
@@ -519,23 +515,19 @@ function reveal(){
     }
     $("qAnswer").appendChild(a);
     if (card.exb != null){
-      renderExampleBox($("qExample"), card.exb);
+      renderExampleLine($("qExample"), card.exb);
     } else if (!isDash(card.ex)){
-      const ex = el("div", "example");
-      ex.appendChild(el("div", "exlabel", "Example"));
-      appendExampleWithAudio(ex, card.ex);
-      $("qExample").appendChild(ex);
+      renderExampleLine($("qExample"), card.ex);
     }
   } else {
     const p = el("div", "pinyin", card.pinyin); $("qAnswer").appendChild(p);
     $("qAnswer").appendChild(el("div", "eng", card.en));
     if (!isDash(card.exZh) || !isDash(card.exPy) || !isDash(card.exEn)){
-      const ex = el("div", "example");
-      ex.appendChild(el("div", "exlabel", "Example"));
-      if (!isDash(card.exZh)) ex.appendChild(el("div", "zh", card.exZh));
-      if (!isDash(card.exPy)) ex.appendChild(el("div", "py", card.exPy));
-      if (!isDash(card.exEn)) ex.appendChild(el("div", "", card.exEn));
-      $("qExample").appendChild(ex);
+      const line = el("div", "exline");
+      if (!isDash(card.exZh)) line.appendChild(el("div", "exline-zh", card.exZh));
+      if (!isDash(card.exPy)) line.appendChild(el("div", "exline-py", card.exPy));
+      if (!isDash(card.exEn)) line.appendChild(el("div", "exline-en", card.exEn));
+      $("qExample").appendChild(line);
     }
   }
 }
@@ -565,8 +557,8 @@ function showResults(){
       sum.textContent = card.type === "qa" ? card.q : `${card.zh} — ${card.pinyin} — ${card.en}`;
       det.appendChild(sum);
       const ans = el("div", "ans");
-      if (card.type === "qa") ans.textContent = String(card.a ?? "").replace(/<br>/g, ", ") + (!isDash(card.ex) ? `\nExample: ${stripSoundTags(stripImgTags(card.ex))}` : "");
-      else ans.textContent = `${card.pinyin}\n${card.en}` + (!isDash(card.exZh) ? `\nExample: ${card.exZh} (${card.exPy}) — ${card.exEn}` : "");
+      if (card.type === "qa") ans.textContent = String(card.a ?? "").replace(/<br>/g, ", ") + (!isDash(card.ex) ? `\n${stripSoundTags(stripImgTags(card.ex))}` : "");
+      else ans.textContent = `${card.pinyin}\n${card.en}` + (!isDash(card.exZh) ? `\n${card.exZh} (${card.exPy}) — ${card.exEn}` : "");
       det.appendChild(ans);
       wrap.appendChild(det);
     }
