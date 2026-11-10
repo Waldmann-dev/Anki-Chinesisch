@@ -1,6 +1,7 @@
 Question	Answer	WordSound	ExampleFront	ExampleBack
 one	一 yī	yi.mp3	I have one (of them).	我有一个。 Wǒ yǒu yí gè. [sound:ex_wo_you_yi_ge.mp3]
-two	二 èr	er.mp3	He has two (of them).	他有两个。 Tā yǒu èr gè. [sound:ex_ta_you_er_ge.mp3]
+two	二 èr	er.mp3	He has two (of them).	他有两个。 Tā yǒu liǎng gè. [sound:ex_ta_you_liang_ge.mp3]
+two (used before a measure word)	两 liǎng	liang.mp3	He has two (of them).	他有两个。 Tā yǒu liǎng gè. [sound:ex_ta_you_liang_ge.mp3]
 three	三 sān	san.mp3	We have three (of them).	我们有三个。 Wǒmen yǒu sān gè. [sound:ex_women_you_san_ge.mp3]
 four	四 sì	si.mp3	She has four (of them).	她有四个。 Tā yǒu sì gè. [sound:ex_ta_you_si_ge.mp3]
 five	五 wǔ	wu.mp3	They have five (of them).	他们有五个。 Tāmen yǒu wǔ gè. [sound:ex_tamen_you_wu_ge.mp3]
@@ -17,6 +18,6 @@ thanks	谢谢 xièxie	xie_xie.mp3	Thank you!	谢谢你！ Xièxie nǐ! [sound:ex
 goodbye	再见 zàijiàn	zai_jian.mp3	Goodbye, thank you.	再见，谢谢你。 Zàijiàn, xièxie nǐ. [sound:ex_zaijian_xiexie_ni.mp3]
 too expensive	太贵了 tài guì le	tai_gui_le.mp3	This is too expensive.	这个太贵了。 Zhège tài guì le. [sound:ex_zhege_tai_gui_le.mp3]
 how much	多少 duōshao	duo_shao.mp3	How much is this?	这个多少？ Zhège duōshao? [sound:ex_zhege_duoshao.mp3]
-how much is this?	这个多少钱 zhège duōshao qián	zhe_ge_duo_shao_qian.mp3	How much is this? Too expensive.	这个多少钱？太贵了。 Zhège duōshao qián? Tài guì le. [sound:ex_zhege_duoshao_qian_tai_gui_le.mp3]
+how much is this?	这个多少钱 zhège duōshao qián	zhe_ge_duo_shao_qian.mp3	How much is this?	这个多少钱？ Zhège duō shǎo qián? [sound:ex_zhege_duo_shao_qian.mp3]
 no, thanks	不用了 bú yòng le	bu_yong_le.mp3	Thanks, no need.	谢谢，不用了。 Xièxie, bú yòng le. [sound:ex_xiexie_bu_yong_le.mp3]
 not spicy	不辣 bú là	bu_la.mp3	This is not spicy.	这个不辣。 Zhège bú là. [sound:ex_zhege_bu_la.mp3]
