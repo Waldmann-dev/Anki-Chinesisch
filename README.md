@@ -12,7 +12,7 @@ The quiz loads all `cards.tsv` live from this repo. Cards with audio show a 🔊
 
 ## Anki Package (.apkg) – One File, Everything Included
 
-Download **[Anki-Chinesisch.apkg](Anki-Chinesisch.apkg)** (335 cards, audio + images included), double-click / import in Anki – cards + audio + images come in together, no separate file copying needed.
+Download **[Anki-Chinesisch.apkg](Anki-Chinesisch.apkg)** (348 cards, audio + images included), double-click / import in Anki – cards + audio + images come in together, no separate file copying needed.
 
 (Alternative: import the individual `cards.tsv` + copy MP3s flat into `collection.media`, see Audio below.)
 
@@ -49,6 +49,7 @@ Import in Anki: File > Import, choose the .tsv, set separator to Tab, map fields
 
 - `audio/Elevenlabs/Lektion1/` – 127 card audios (ElevenLabs, Voice Alice, model eleven_v4): single words (e.g. `ni_hao.mp3`), 21 initial names (`initial_b.mp3` = bō, …), 25 finals in first tone (`final_a.mp3` = ā, …). Linked in cards via `[sound:…]` in the Example column.
 - `audio/Lektion1/` – 17 BLCUP lesson tracks (full dialogues / phonetics exercises / classroom phrases), named `NN_dialogue_….mp3`. Lesson audio, NOT linked in cards.
+- `audio/Alessia/` – 13 voice clips from Alessia's Instagram Reel "20 MUST-KNOW Chinese Words" (DYy4tcMtFa6), her own voice for the 13 new Basic words (e.g. `05-zao-shang-hao.mp3`). Linked in cards via `[sound:…]` in the Example column; the website falls back to this folder when a file is not in `audio/Elevenlabs/Lektion1/`.
 
 In Anki: copy all MP3s **flat** into `collection.media` (subfolders don't matter for `[sound:]`, only filenames).
 
