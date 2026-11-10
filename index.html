@@ -162,7 +162,7 @@
   <p>Anki-style quiz. Cards load <strong>live</strong> from the <a href="https://github.com/Waldmann-dev/Anki-Chinesisch" target="_blank" rel="noopener">GitHub repo</a> — no copy, no algorithm. Each card comes up exactly once per round.</p>
   <p class="muted small">Source: <a href="https://github.com/Waldmann-dev/Anki-Chinesisch" target="_blank" rel="noopener">Waldmann-dev/Anki-Chinesisch</a> · <span id="loadedAt">loading…</span></p>
 </footer>
-<div class="version">v2.9.1</div>
+<div class="version">v2.9.2</div>
 
 <script>
 const REPO = "Waldmann-dev/Anki-Chinesisch";
@@ -241,19 +241,33 @@ function parseTSV(text, path){
 }
 
 // ---------- loading live from GitHub ----------
+// Re-entrancy guard: the ↻ Reload button can start a second load while the
+// first is still fetching (27 sequential TSV fetches take a while). Every run
+// takes a sequence number; a run that is no longer the latest stops touching
+// the shared `decks` array and the DOM at the next await checkpoint, so a
+// stale run can neither inflate the counts (it used to push into the same
+// array — "635 cards in 48 decks") nor crash on the progress bar (the newer
+// run's renderTree already removed it — "can't access property 'style'").
+let loadSeq = 0;
 async function loadDecks(){
+  const seq = ++loadSeq;
+  const isCurrent = () => seq === loadSeq;
   $("status").innerHTML = "";
   $("treeWrap").innerHTML = "<p class='muted' id='loadLabel'>Connecting to GitHub…</p><div class='progress'><div id='loadBar'></div></div><p class='muted small' id='loadCount'></p>";
   const setProgress = (done, total) => {
-    $("loadBar").style.width = (total ? Math.round(done / total * 100) : 0) + "%";
-    $("loadLabel").textContent = total ? "Loading decks from GitHub…" : "Connecting to GitHub…";
-    $("loadCount").textContent = total ? `${done} of ${total} decks loaded · ${total - done} left` : "";
+    if (!isCurrent()) return;
+    const bar = $("loadBar"), label = $("loadLabel"), count = $("loadCount");
+    if (bar) bar.style.width = (total ? Math.round(done / total * 100) : 0) + "%";
+    if (label) label.textContent = total ? "Loading decks from GitHub…" : "Connecting to GitHub…";
+    if (count) count.textContent = total ? `${done} of ${total} decks loaded · ${total - done} left` : "";
   };
   setProgress(0, 0);
   $("startBtn").disabled = true;
   const treeRes = await fetch(TREE_URL, { headers: { "Accept": "application/vnd.github+json" } });
+  if (!isCurrent()) return;
   if (!treeRes.ok) throw new Error(`GitHub API ${treeRes.status} — try again in a minute (rate limit?)`);
   const tree = await treeRes.json();
+  if (!isCurrent()) return;
   const tsvPaths = tree.tree.filter(t => t.type === "blob" && t.path.endsWith("/cards.tsv")).map(t => t.path).sort();
   decks = [];
   const skipped = [];
@@ -262,11 +276,14 @@ async function loadDecks(){
   for (const p of tsvPaths){
     try {
       const res = await fetch(rawUrl(p));
+      if (!isCurrent()) return;
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const dir = p.replace(/\/cards\.tsv$/, "");
       const cards = parseTSV(await res.text(), dir);
+      if (!isCurrent()) return;
       decks.push({ path: dir, label: dir.split("/").join(" :: "), parts: dir.split("/"), cards });
     } catch (e) {
+      if (!isCurrent()) return;
       // One file may 404 while the repo is being restructured — skip it,
       // load everything else, and warn instead of failing the whole page.
       skipped.push(p);
@@ -274,6 +291,7 @@ async function loadDecks(){
     done++;
     setProgress(done, tsvPaths.length);
   }
+  if (!isCurrent()) return;
   if (decks.length === 0) throw new Error("No decks could be loaded from GitHub.");
   if (skipped.length) {
     $("status").innerHTML = "";
@@ -588,7 +606,14 @@ function showErr(err){
   $("status").appendChild(d);
   $("treeWrap").innerHTML = "<p class='muted'>Loading failed — press ↻ Reload to try again.</p>";
 }
-async function init(){ try { await loadDecks(); } catch (e){ showErr(e); } }
+async function init(){
+  // Only the latest run may report an error: a stale run that fails after a
+  // newer reload started must not wipe the newer run's tree with "Loading
+  // failed". (loadDecks() is called synchronously here, so loadSeq + 1 is
+  // exactly the sequence it is about to take.)
+  const seq = loadSeq + 1;
+  try { await loadDecks(); } catch (e){ if (seq === loadSeq) showErr(e); }
+}
 init();
 </script>
 </body>
