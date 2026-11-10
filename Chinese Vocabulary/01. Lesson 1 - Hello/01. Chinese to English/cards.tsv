@@ -1,37 +1,37 @@
-Question	Answer	Example
-爸爸 bàba	dad	我爸爸很好。 Wǒ bàba hěn hǎo. (My dad is very well.) [sound:ba_ba.mp3]
-妈妈 māma	mom	我妈妈很忙。 Wǒ māma hěn máng. (My mom is very busy.) [sound:ma_ma.mp3]
-爸 bà	father	我爸很好，谢谢。 Wǒ bà hěn hǎo, xièxie. (My father is very well, thank you.) [sound:ba4.mp3]
-伯伯 bóbo	uncle	我伯伯很忙。 Wǒ bóbo hěn máng. (My uncle is very busy.) [sound:bo_bo.mp3]
-你们 nǐmen	you (plural)	你们忙吗？ Nǐmen máng ma? (Are you (all) busy?) [sound:ni_men.mp3]
-十一 shíyī	eleven	奶奶有十一个。 Nǎinai yǒu shíyī gè. (Grandma has eleven (of them).) [sound:shi_yi.mp3]
-十二 shí'èr	twelve	她有十二个。 Tā yǒu shí'èr gè. (She has twelve (of them).) [sound:shi_er.mp3]
-十三 shísān	thirteen	我们有十三个。 Wǒmen yǒu shísān gè. (We have thirteen (of them).) [sound:shi_san.mp3]
-十四 shísì	fourteen	他们有十四个。 Tāmen yǒu shísì gè. (They have fourteen (of them).) [sound:shi_si.mp3]
-十五 shíwǔ	fifteen	你们有十五个。 Nǐmen yǒu shíwǔ gè. (You all have fifteen (of them).) [sound:shi_wu.mp3]
-你们好 nǐmen hǎo	hello everyone	你们好吗？ Nǐmen hǎo ma? (How are you all?) [sound:ni_men_hao.mp3]
-欢迎你 huānyíng nǐ	welcome	欢迎你们！ Huānyíng nǐmen! (Welcome (to you all)!) [sound:huan_ying_ni.mp3]
-弟弟 dìdi	younger brother	弟弟，你好吗？ Dìdi, nǐ hǎo ma? (Younger brother, how are you?) [sound:di_di.mp3]
-婆婆 pópo	grandmother	我婆婆很好，谢谢。 Wǒ pópo hěn hǎo, xièxie. (My grandmother is very well, thank you.) [sound:po_po.mp3]
-你呢 nǐ ne	and you?	我很好，你呢？ Wǒ hěn hǎo, nǐ ne? (I'm very well, and you?) [sound:ni_ne.mp3]
-你读 nǐ dú	please read aloud	请你读。 Qǐng nǐ dú. (Please read (aloud).) [sound:ni_du.mp3]
-很忙 hěn máng	very busy	我很忙。 Wǒ hěn máng. (I am very busy.) [sound:hen_mang.mp3]
-你忙吗 nǐ máng ma	are you busy?	你忙吗？我很忙。 Nǐ máng ma? Wǒ hěn máng. (Are you busy? I am very busy.) [sound:ni_mang_ma.mp3]
-我 wǒ	I/me	我很好。 Wǒ hěn hǎo. (I am very well.) [sound:wo.mp3]
-你 nǐ	you (singular)	你忙吗？ Nǐ máng ma? (Are you busy?) [sound:ni.mp3]
-您 nín	you (polite)	您好吗？ Nín hǎo ma? (How are you? (polite)) [sound:nin.mp3]
-他 tā	he	他很好。 Tā hěn hǎo. (He is very well.) [sound:ta.mp3]
-她 tā	she	她很好。 Tā hěn hǎo. (She is very well.) [sound:ta.mp3]
-它 tā	it	它不辣。 Tā bú là. (It is not spicy.) [sound:ta.mp3]
-我们 wǒmen	we/us	我们很好。 Wǒmen hěn hǎo. (We are very well.) [sound:wo_men.mp3]
-您们 nínmen	you (polite, plural)	您们好吗？ Nínmen hǎo ma? (How are you (all)? (polite)) [sound:nin_men.mp3]
-他们 tāmen	they (masc.)	他们很好。 Tāmen hěn hǎo. (They are very well.) [sound:ta_men.mp3]
-她们 tāmen	they (fem.)	她们很好。 Tāmen hěn hǎo. (They are very well.) [sound:ta_men.mp3]
-它们 tāmen	they (neut.)	它们不辣。 Tāmen bú là. (They are not spicy.) [sound:ta_men.mp3]
-忙 máng	busy	你忙吗？ Nǐ máng ma? (Are you busy?) [sound:mang.mp3]
-吗 ma	question particle	你忙吗？ Nǐ máng ma? (Are you busy?) [sound:ma.mp3]
-很 hěn	very	我很忙。 Wǒ hěn máng. (I am very busy.) [sound:hen.mp3]
-很好 hěn hǎo	Very good!	我很好，谢谢。 Wǒ hěn hǎo, xièxie. (I'm very well, thanks.) [sound:hen_hao.mp3]
-你们读 nǐmen dú	Read aloud!	请你们读。 Qǐng nǐmen dú. (Please read (aloud), everyone.) [sound:ni_men_du.mp3]
-看黑板 kàn hēibǎn	Look at the blackboard.	请看黑板。 Qǐng kàn hēibǎn. (Please look at the blackboard.) [sound:kan_hei_ban.mp3]
-奶奶 nǎinai	grandma	奶奶，你好吗？ Nǎinai, nǐ hǎo ma? (Grandma, how are you?) [sound:nai_nai.mp3]
+Question	Answer	WordSound	ExampleFront	ExampleBack
+爸爸 bàba	dad	ba_ba.mp3	我爸爸很好。 Wǒ bàba hěn hǎo. [sound:ex_wo_baba_hen_hao.mp3]	My dad is very well.
+妈妈 māma	mom	ma_ma.mp3	我妈妈很忙。 Wǒ māma hěn máng. [sound:ex_wo_mama_hen_mang.mp3]	My mom is very busy.
+爸 bà	father	ba4.mp3	我爸很好，谢谢。 Wǒ bà hěn hǎo, xièxie. [sound:ex_wo_ba_hen_hao_xiexie.mp3]	My father is very well, thank you.
+伯伯 bóbo	uncle	bo_bo.mp3	我伯伯很忙。 Wǒ bóbo hěn máng. [sound:ex_wo_bobo_hen_mang.mp3]	My uncle is very busy.
+你们 nǐmen	you (plural)	ni_men.mp3	你们忙吗？ Nǐmen máng ma? [sound:ex_nimen_mang_ma.mp3]	Are you (all) busy?
+十一 shíyī	eleven	shi_yi.mp3	奶奶有十一个。 Nǎinai yǒu shíyī gè. [sound:ex_nainai_you_shiyi_ge.mp3]	Grandma has eleven (of them).
+十二 shí'èr	twelve	shi_er.mp3	她有十二个。 Tā yǒu shí'èr gè. [sound:ex_ta_you_shi_er_ge.mp3]	She has twelve (of them).
+十三 shísān	thirteen	shi_san.mp3	我们有十三个。 Wǒmen yǒu shísān gè. [sound:ex_women_you_shisan_ge.mp3]	We have thirteen (of them).
+十四 shísì	fourteen	shi_si.mp3	他们有十四个。 Tāmen yǒu shísì gè. [sound:ex_tamen_you_shisi_ge.mp3]	They have fourteen (of them).
+十五 shíwǔ	fifteen	shi_wu.mp3	你们有十五个。 Nǐmen yǒu shíwǔ gè. [sound:ex_nimen_you_shiwu_ge.mp3]	You all have fifteen (of them).
+你们好 nǐmen hǎo	hello everyone	ni_men_hao.mp3	你们好吗？ Nǐmen hǎo ma? [sound:ex_nimen_hao_ma.mp3]	How are you all?
+欢迎你 huānyíng nǐ	welcome	huan_ying_ni.mp3	欢迎你们！ Huānyíng nǐmen! [sound:ex_huanying_nimen.mp3]	Welcome (to you all)!
+弟弟 dìdi	younger brother	di_di.mp3	弟弟，你好吗？ Dìdi, nǐ hǎo ma? [sound:ex_didi_ni_hao_ma.mp3]	Younger brother, how are you?
+婆婆 pópo	grandmother	po_po.mp3	我婆婆很好，谢谢。 Wǒ pópo hěn hǎo, xièxie. [sound:ex_wo_popo_hen_hao_xiexie.mp3]	My grandmother is very well, thank you.
+你呢 nǐ ne	and you?	ni_ne.mp3	我很好，你呢？ Wǒ hěn hǎo, nǐ ne? [sound:ex_wo_hen_hao_ni_ne.mp3]	I'm very well, and you?
+你读 nǐ dú	please read aloud	ni_du.mp3	请你读。 Qǐng nǐ dú. [sound:ex_qing_ni_du.mp3]	Please read (aloud).
+很忙 hěn máng	very busy	hen_mang.mp3	我很忙。 Wǒ hěn máng. [sound:ex_wo_hen_mang.mp3]	I am very busy.
+你忙吗 nǐ máng ma	are you busy?	ni_mang_ma.mp3	你忙吗？我很忙。 Nǐ máng ma? Wǒ hěn máng. [sound:ex_ni_mang_ma_wo_hen_mang.mp3]	Are you busy? I am very busy.
+我 wǒ	I/me	wo.mp3	我很好。 Wǒ hěn hǎo. [sound:ex_wo_hen_hao.mp3]	I am very well.
+你 nǐ	you (singular)	ni.mp3	你忙吗？ Nǐ máng ma? [sound:ex_ni_mang_ma.mp3]	Are you busy?
+您 nín	you (polite)	nin.mp3	您好吗？ Nín hǎo ma? [sound:ex_nin_hao_ma.mp3]	How are you? (polite)
+他 tā	he	ta.mp3	他很好。 Tā hěn hǎo. [sound:ex_ta_m_hen_hao.mp3]	He is very well.
+她 tā	she	ta.mp3	她很好。 Tā hěn hǎo. [sound:ex_ta_f_hen_hao.mp3]	She is very well.
+它 tā	it	ta.mp3	它不辣。 Tā bú là. [sound:ex_ta_bu_la.mp3]	It is not spicy.
+我们 wǒmen	we/us	wo_men.mp3	我们很好。 Wǒmen hěn hǎo. [sound:ex_women_hen_hao.mp3]	We are very well.
+您们 nínmen	you (polite, plural)	nin_men.mp3	您们好吗？ Nínmen hǎo ma? [sound:ex_ninmen_hao_ma.mp3]	How are you (all)? (polite)
+他们 tāmen	they (masc.)	ta_men.mp3	他们很好。 Tāmen hěn hǎo. [sound:ex_tamen_m_hen_hao.mp3]	They are very well.
+她们 tāmen	they (fem.)	ta_men.mp3	她们很好。 Tāmen hěn hǎo. [sound:ex_tamen_f_hen_hao.mp3]	They are very well.
+它们 tāmen	they (neut.)	ta_men.mp3	它们不辣。 Tāmen bú là. [sound:ex_tamen_bu_la.mp3]	They are not spicy.
+忙 máng	busy	mang.mp3	你忙吗？ Nǐ máng ma? [sound:ex_ni_mang_ma.mp3]	Are you busy?
+吗 ma	question particle	ma.mp3	你忙吗？ Nǐ máng ma? [sound:ex_ni_mang_ma.mp3]	Are you busy?
+很 hěn	very	hen.mp3	我很忙。 Wǒ hěn máng. [sound:ex_wo_hen_mang.mp3]	I am very busy.
+很好 hěn hǎo	Very good!	hen_hao.mp3	我很好，谢谢。 Wǒ hěn hǎo, xièxie. [sound:ex_wo_hen_hao_xiexie.mp3]	I'm very well, thanks.
+你们读 nǐmen dú	Read aloud!	ni_men_du.mp3	请你们读。 Qǐng nǐmen dú. [sound:ex_qing_nimen_du.mp3]	Please read (aloud), everyone.
+看黑板 kàn hēibǎn	Look at the blackboard.	kan_hei_ban.mp3	请看黑板。 Qǐng kàn hēibǎn. [sound:ex_qing_kan_heiban.mp3]	Please look at the blackboard.
+奶奶 nǎinai	grandma	nai_nai.mp3	奶奶，你好吗？ Nǎinai, nǐ hǎo ma? [sound:ex_nainai_ni_hao_ma.mp3]	Grandma, how are you?
