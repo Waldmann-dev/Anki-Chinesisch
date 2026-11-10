@@ -6,9 +6,11 @@
 <title>Chinese Flashcards — Live from GitHub</title>
 <meta name="description" content="Anki-style flashcards for the Chinese deck. Loads cards live from the GitHub repo, no algorithm, each card once per round.">
 <style>
-  :root{--bg:#f6f4ef;--card:#fff;--ink:#1c1c1c;--muted:#6b675e;--line:#e5e0d5;--accent:#c0392b;--green:#1e7d4d;--red:#b42318;--blue:#1d4ed8}
+  :root{--bg:#f6f4ef;--card:#fff;--ink:#1c1c1c;--muted:#6b675e;--line:#e5e0d5;--accent:#c0392b;--green:#1e7d4d;--red:#b42318;--blue:#1d4ed8;--exbg:#faf7f0;--ghostbg:#eee9df}
+  @media (prefers-color-scheme: dark){:root{--bg:#1c1c1e;--card:#2c2c2e;--ink:#f5f5f7;--muted:#a1a1a6;--line:#48484a;--exbg:#2c2c2e;--ghostbg:#3a3a3c}
+  .progress{background:#3a3a3c}.error{background:#3a1d1a;border-color:#7a2e28;color:#ffb4a8}}
   *{box-sizing:border-box}
-  body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.5}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-size:17px;line-height:1.5}
   header{max-width:760px;margin:0 auto;padding:28px 16px 8px}
   h1{margin:0;font-size:28px;line-height:1.15}
   .sub{color:var(--muted);margin:8px 0 0}
@@ -17,13 +19,13 @@
   .box{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px}
   .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
   .muted{color:var(--muted);font-size:14px}
-  .small{font-size:13px}
+  .small{font-size:14px}
   button{border:0;border-radius:10px;padding:12px 18px;font-size:16px;font-weight:650;cursor:pointer}
   button:disabled{opacity:.45;cursor:not-allowed}
   .primary{background:var(--ink);color:#fff}
   .good{background:var(--green);color:#fff}
   .bad{background:var(--red);color:#fff}
-  .ghost{background:#eee9df;color:var(--ink)}
+  .ghost{background:var(--ghostbg);color:var(--ink)}
   .wide{width:100%}
   /* deck tree */
   ul.tree{list-style:none;margin:12px 0 0;padding:0}
@@ -32,7 +34,7 @@
   label.chk{display:flex;gap:10px;align-items:flex-start;cursor:pointer}
   label.chk input{margin-top:4px;accent-color:var(--ink);width:18px;height:18px;flex:none}
   .treerow > input[type=checkbox]{accent-color:var(--ink);width:18px;height:18px;flex:none;margin:0}
-  .count{color:var(--muted);font-size:13px}
+  .count{color:var(--muted);font-size:14px}
   .folder{font-weight:700}
   #setupView label{display:inline-flex;gap:8px;align-items:center;margin-right:18px;cursor:pointer}
   #setupView h2{font-size:19px}
@@ -40,7 +42,7 @@
   .progress{height:8px;background:#e9e4d8;border-radius:999px;overflow:hidden;margin:4px 0 14px}
   .progress>div{height:100%;background:var(--ink);width:0%}
   .topline{display:flex;justify-content:space-between;gap:12px;color:var(--muted);font-size:14px;margin-bottom:10px}
-  .decklabel{font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+  .decklabel{font-size:14px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
   .front{font-size:22px;font-weight:650;margin:10px 0 6px;white-space:pre-wrap;overflow-wrap:anywhere}
   .front.big{font-size:56px;line-height:1.2}
   .front-zh{font-size:56px;line-height:1.2;font-weight:650}
@@ -50,31 +52,33 @@
   .answer .a{font-size:20px;font-weight:650;white-space:pre-wrap;overflow-wrap:anywhere}
   .answer .pinyin{font-size:28px;font-weight:700}
   .answer .eng{font-size:20px;margin-top:4px}
-  .example{margin-top:14px;background:#faf7f0;border:1px solid var(--line);border-radius:10px;padding:12px 14px}   .example img{max-width:100%;height:auto;display:block;margin:10px 0;border:1px solid var(--line);border-radius:8px;background:#fff}   .audio-row{margin-top:8px;display:flex;gap:8px;flex-wrap:wrap}   .audio-btn{border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 14px;font-size:18px;cursor:pointer;line-height:1}   .audio-btn:active{transform:scale(.96)}   .audio-btn[disabled]{opacity:.5;cursor:default}
-  .example .zh{font-size:22px}
-  .example .py{color:var(--muted)}
+  .example{margin-top:14px;background:var(--exbg);border:1px solid var(--line);border-radius:12px;padding:14px 16px}   .example img{max-width:100%;height:auto;display:block;margin:10px 0;border:1px solid var(--line);border-radius:8px;background:#fff}   .audio-row{margin-top:8px;display:flex;gap:8px;flex-wrap:wrap}   .audio-btn{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:10px 16px;min-width:44px;min-height:44px;font-size:18px;cursor:pointer;line-height:1}   .audio-btn:active{transform:scale(.96)}   .audio-btn[disabled]{opacity:.5;cursor:default}
+  .exlabel{font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+  .example .zh{font-size:22px;font-weight:600;line-height:1.4}
+  .example .py{color:var(--muted);font-size:17px;line-height:1.45}
   .grade{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
   .grade button{padding:14px}
-  kbd{background:#eee9df;border:1px solid var(--line);border-bottom-width:2px;border-radius:6px;padding:1px 6px;font-size:12px}
+  kbd{background:var(--ghostbg);border:1px solid var(--line);border-bottom-width:2px;border-radius:6px;padding:1px 6px;font-size:12px}
   /* results */
   .score{font-size:56px;font-weight:800;line-height:1;margin:8px 0}
   .wrong{margin-top:18px}
   .wrong details{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin:8px 0}
   .wrong summary{cursor:pointer;font-weight:650}
   .wrong .ans{margin-top:8px;white-space:pre-wrap}
-  .howto-box{background:#faf7f0;border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-top:10px}
+  .howto-box{background:var(--exbg);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-top:10px}
   .howto{list-style:none;margin:10px 0 0;padding:0;font-size:16px;line-height:1.55}
   .howto li{margin:8px 0}
   .howto .big-arrow{font-size:26px;vertical-align:-2px}
   .treerow{display:flex;gap:8px;align-items:center}
-  button.toggle{background:#eee9df;border:1px solid var(--line);border-radius:10px;padding:5px;min-width:40px;min-height:40px;cursor:pointer;font-size:28px;line-height:1;color:var(--ink);flex:none}
+  button.toggle{background:var(--ghostbg);border:1px solid var(--line);border-radius:10px;padding:5px;min-width:40px;min-height:40px;cursor:pointer;font-size:28px;line-height:1;color:var(--ink);flex:none}
   ul.collapsed{display:none}
   footer{max-width:760px;margin:24px auto 0;padding:0 16px 56px;color:var(--muted);font-size:14px}
   footer a{color:inherit}
-  .version{position:fixed;right:12px;bottom:12px;z-index:50;background:#eee9df;border:1px solid var(--line);border-radius:999px;padding:4px 10px;font-size:12px;color:var(--muted)}
+  .version{position:fixed;right:12px;bottom:12px;z-index:50;background:var(--ghostbg);border:1px solid var(--line);border-radius:999px;padding:4px 10px;font-size:12px;color:var(--muted)}
   #status{margin-top:12px}
   .error{background:#fdecea;border:1px solid #f5c6c0;border-radius:10px;padding:12px 14px}
   .hidden{display:none!important}
+  button:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
 </style>
 </head>
 <body>
@@ -124,7 +128,9 @@
     <div class="topline"><span id="qCounter"></span><span id="qScore"></span></div>
     <div class="progress"><div id="qBar"></div></div>
     <div class="front" id="qFront"></div>
+    <div id="qFrontAudio"></div>
     <p class="hint" id="qHint"></p>
+    <div id="qFrontExample"></div>
     <div id="answerWrap" class="answer hidden">
       <div id="qAnswer"></div>
       <div id="qExample"></div>
@@ -156,7 +162,7 @@
   <p>Anki-style quiz. Cards load <strong>live</strong> from the <a href="https://github.com/Waldmann-dev/Anki-Chinesisch" target="_blank" rel="noopener">GitHub repo</a> — no copy, no algorithm. Each card comes up exactly once per round.</p>
   <p class="muted small">Source: <a href="https://github.com/Waldmann-dev/Anki-Chinesisch" target="_blank" rel="noopener">Waldmann-dev/Anki-Chinesisch</a> · <span id="loadedAt">loading…</span></p>
 </footer>
-<div class="version">v2.8</div>
+<div class="version">v2.9</div>
 
 <script>
 const REPO = "Waldmann-dev/Anki-Chinesisch";
@@ -184,11 +190,32 @@ function imageFiles(text){ const out = []; if (!text) return out; const re = /<i
 function stripImgTags(text){ return (text || "").replace(/<img\s+src="[^"]+">/g, " ").replace(/\s+/g, " ").trim(); }
 function audioButton(filename){ const b = document.createElement("button"); b.className = "audio-btn"; b.type = "button"; b.textContent = "🔊"; b.title = "Play " + filename; b.addEventListener("click", (ev) => { ev.stopPropagation(); try { const a = new Audio(AUDIO_BASE + encodeURIComponent(filename)); a.play().catch(() => { const a2 = new Audio(AUDIO_BASE_ALESSIA + encodeURIComponent(filename)); a2.play().catch(() => { b.disabled = true; b.title = "Audio not available"; }); }); } catch (e) { b.disabled = true; } }); return b; }
 function appendExampleWithAudio(container, exampleText){ const files = soundFiles(exampleText); const imgs = imageFiles(exampleText); const clean = stripSoundTags(stripImgTags(exampleText)); if (clean) container.appendChild(el("div", "", clean)); if (files.length){ const row = document.createElement("div"); row.className = "audio-row"; for (const f of files) row.appendChild(audioButton(f)); container.appendChild(row); } for (const src of imgs){ const im = document.createElement("img"); im.src = IMAGE_BASE + encodeURIComponent(src); im.alt = src; container.appendChild(im); } }
+// One Example box: label + content. A Chinese sentence ("CHARS PINYIN
+// [sound:...]") renders structured (.zh large, .py muted) with its sentence
+// audio; anything else (English sentence, legacy grammar example) falls back
+// to the old text + audio-buttons + images rendering. Returns false when the
+// example is empty/dash, so callers can hide the box entirely.
+function renderExampleBox(container, exampleText){
+  if (isDash(exampleText)) return false;
+  const box = el("div", "example");
+  box.appendChild(el("div", "exlabel", "Example"));
+  const m = (exampleText || "").match(/^([\u4e00-\u9fff][\u4e00-\u9fff，。？！、；：]*)\s+(.+?)(\s*\[sound:[^\]]+\])?\s*$/);
+  if (m){
+    box.appendChild(el("div", "zh", m[1]));
+    box.appendChild(el("div", "py", m[2]));
+    const files = soundFiles(exampleText);
+    if (files.length){ const row = document.createElement("div"); row.className = "audio-row"; for (const f of files) row.appendChild(audioButton(f)); box.appendChild(row); }
+  } else {
+    appendExampleWithAudio(box, exampleText);
+  }
+  container.appendChild(box);
+  return true;
+}
 function appendAnswerText(container, text){ const parts = String(text ?? "").split("<br>"); parts.forEach((part, i) => { if (i > 0) container.appendChild(document.createElement("br")); if (part) container.appendChild(document.createTextNode(part)); }); }
 function shuffle(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
 
 // ---------- TSV parsing ----------
-// Q&A: Question | Answer | Example
+// Q&A: Question | Answer | Example  (or 5-col vocab: Question | Answer | WordSound | ExampleFront | ExampleBack)
 // Vocab: Chinese | Pinyin | English | Example (Chinese) | Example (Pinyin) | Example (English)
 function parseTSV(text, path){
   const lines = text.replace(/\r\n?/g, "\n").split("\n").filter(l => l.trim() !== "");
@@ -198,7 +225,13 @@ function parseTSV(text, path){
   for (const line of lines.slice(1)){
     const cols = line.split("\t");
     const get = (i) => (cols[i] ?? "").trim();
-    if (header[0] === "Question"){
+    if (header[0] === "Question" && header.length >= 5){
+      // New vocab format: Question | Answer | WordSound | ExampleFront | ExampleBack.
+      // WordSound holds the word-audio filename in BOTH directions; the deck
+      // path decides where it plays (front for Chinese->English, back for
+      // English->Chinese). ex mirrors ExampleBack for the results review.
+      cards.push({ deck: path, type: "qa", q: get(0), a: get(1), ws: get(2), exf: get(3), exb: get(4), ex: get(4) });
+    } else if (header[0] === "Question"){
       cards.push({ deck: path, type: "qa", q: get(0), a: get(1), ex: get(2) });
     } else if (header[0] === "Chinese"){
       cards.push({ deck: path, type: "vocab", zh: get(0), pinyin: get(1), en: get(2), exZh: get(3), exPy: get(4), exEn: get(5) });
@@ -415,6 +448,7 @@ function showCard(){
   $("revealRow").classList.remove("hidden");
   $("gradeRow").classList.add("hidden");
   $("qAnswer").innerHTML = ""; $("qExample").innerHTML = "";
+  $("qFrontAudio").innerHTML = ""; $("qFrontExample").innerHTML = "";
   if (card.type === "qa"){
     // Vocab front like "你好 nǐ hǎo": character on top, Pinyin below, a tick smaller.
     const m = card.q.match(/^([\u4e00-\u9fff]+)\s+(.+)$/);
@@ -427,6 +461,14 @@ function showCard(){
       $("qFront").className = "front"; $("qFront").textContent = card.q;
     }
     $("qHint").classList.add("hidden");
+    // Split layout: Chinese->English fronts play the word audio and show the
+    // front example box; English->Chinese fronts show only the English box
+    // (the word audio belongs to the answer, revealed on the back).
+    if (card.ws && card.deck && card.deck.includes("Chinese to English")){
+      const row = document.createElement("div"); row.className = "audio-row";
+      row.appendChild(audioButton(card.ws)); $("qFrontAudio").appendChild(row);
+    }
+    if (card.exf != null) renderExampleBox($("qFrontExample"), card.exf);
   } else {
     $("qFront").className = "front big"; $("qFront").textContent = card.zh;
     $("qHint").classList.remove("hidden");
@@ -450,10 +492,17 @@ function reveal(){
     } else {
       appendAnswerText(a, card.a);
     }
+    // English->Chinese backs play the word audio with the answer.
+    if (card.ws && card.deck && card.deck.includes("English to Chinese")){
+      const row = document.createElement("div"); row.className = "audio-row";
+      row.appendChild(audioButton(card.ws)); a.appendChild(row);
+    }
     $("qAnswer").appendChild(a);
-    if (!isDash(card.ex)){
+    if (card.exb != null){
+      renderExampleBox($("qExample"), card.exb);
+    } else if (!isDash(card.ex)){
       const ex = el("div", "example");
-      ex.appendChild(el("div", "small muted", "Example"));
+      ex.appendChild(el("div", "exlabel", "Example"));
       appendExampleWithAudio(ex, card.ex);
       $("qExample").appendChild(ex);
     }
@@ -462,7 +511,7 @@ function reveal(){
     $("qAnswer").appendChild(el("div", "eng", card.en));
     if (!isDash(card.exZh) || !isDash(card.exPy) || !isDash(card.exEn)){
       const ex = el("div", "example");
-      ex.appendChild(el("div", "small muted", "Example"));
+      ex.appendChild(el("div", "exlabel", "Example"));
       if (!isDash(card.exZh)) ex.appendChild(el("div", "zh", card.exZh));
       if (!isDash(card.exPy)) ex.appendChild(el("div", "py", card.exPy));
       if (!isDash(card.exEn)) ex.appendChild(el("div", "", card.exEn));
