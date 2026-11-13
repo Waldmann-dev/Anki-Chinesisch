@@ -56,6 +56,7 @@
   .answer .pinyin{font-size:22px;font-weight:500}
   .answer .eng{font-size:22px;margin-top:4px}
   .audio-btn{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:10px 16px;min-width:44px;min-height:44px;font-size:18px;cursor:pointer;line-height:1}   .audio-btn:active{transform:scale(.96)}   .audio-btn[disabled]{opacity:.5;cursor:default}   .audio-btn.inline{display:inline-flex;align-items:center;justify-content:center;vertical-align:middle;margin-left:.35em;padding:.05em .2em;font-size:1em;line-height:1;min-width:0;min-height:0}
+  .audio-row-unified{display:flex;justify-content:center;margin-top:10px}
   .exline{margin-top:12px;color:var(--muted);font-size:16px;line-height:1.55}
   .exline-zh{font-size:16px}
   .grade{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
@@ -164,7 +165,7 @@
   <p>Anki-style quiz. Cards load <strong>live</strong> from the <a href="https://github.com/Waldmann-dev/Anki-Chinesisch" target="_blank" rel="noopener">GitHub repo</a> — no copy, no algorithm. Each card comes up exactly once per round.</p>
   <p class="muted small">Source: <a href="https://github.com/Waldmann-dev/Anki-Chinesisch" target="_blank" rel="noopener">Waldmann-dev/Anki-Chinesisch</a> · <span id="loadedAt">loading…</span></p>
 </footer>
-<div class="version">v2.9.4</div>
+<div class="version">v2.9.5</div>
 
 <script>
 const REPO = "Waldmann-dev/Anki-Chinesisch";
@@ -189,17 +190,59 @@ function soundFiles(text){ const out = []; if (!text) return out; const re = /\[
 function stripSoundTags(text){ return (text || "").replace(/\[sound:[^\]]+\]/g, "").replace(/\s+/g, " ").trim(); }
 function stripImgTags(text){ return (text || "").replace(/<img\s+src="[^"]+">/g, " ").replace(/\s+/g, " ").trim(); }
 function audioButton(filename, inline){ const b = document.createElement("button"); b.className = inline ? "audio-btn inline" : "audio-btn"; b.type = "button"; b.textContent = "🔊"; b.title = "Play " + filename; b.addEventListener("click", (ev) => { ev.stopPropagation(); try { const a = new Audio(AUDIO_BASE + encodeURIComponent(filename)); a.play().catch(() => { const a2 = new Audio(AUDIO_BASE_ALESSIA + encodeURIComponent(filename)); a2.play().catch(() => { b.disabled = true; b.title = "Audio not available"; }); }); } catch (e) { b.disabled = true; } }); return b; }
+
+// ONE button that plays several files in sequence (word first, then the
+// example sentence), with the same ElevenLabs -> Alessia base fallback as
+// audioButton. Clicking again restarts the sequence.
+function unifiedAudioButton(files){
+  const list = (files || []).filter(Boolean);
+  if (!list.length) return null;
+  const b = document.createElement("button");
+  b.className = "audio-btn unified"; b.type = "button"; b.textContent = "🔊";
+  b.title = "Play: word, then example sentence";
+  let current = null;
+  b.addEventListener("click", (ev) => {
+    ev.stopPropagation();
+    if (current) { try { current.pause(); } catch (e) {} }
+    const playFrom = (i) => {
+      if (i >= list.length) return;
+      let settled = false;
+      const next = () => { if (!settled){ settled = true; playFrom(i + 1); } };
+      const attempt = (base, isLast) => {
+        let failed = false;
+        const fail = () => { if (failed) return; failed = true; if (!isLast) attempt(AUDIO_BASE_ALESSIA, true); else next(); };
+        const a = new Audio(base + encodeURIComponent(list[i]));
+        current = a;
+        a.addEventListener("ended", next);
+        a.addEventListener("error", fail);
+        try { const p = a.play(); if (p && p.catch) p.catch(fail); } catch (e) { fail(); }
+      };
+      attempt(AUDIO_BASE, false);
+    };
+    playFrom(0);
+  });
+  return b;
+}
+function appendUnifiedAudio(container, files){
+  const b = unifiedAudioButton(files);
+  if (!b) return false;
+  const row = document.createElement("div");
+  row.className = "audio-row-unified";
+  row.appendChild(b);
+  container.appendChild(row);
+  return true;
+}
 // Quiet gray example line, no box, no label. A Chinese sentence ("CHARS PINYIN
 // [sound:...]") renders as Chinese line + pinyin line with its sentence audio;
 // anything else (English sentence) renders as plain gray text, no audio button.
-function renderExampleLine(container, exampleText){
+function renderExampleLine(container, exampleText, opts){
   if (isDash(exampleText)) return false;
   const line = el("div", "exline");
   const m = (exampleText || "").match(/^([\u4e00-\u9fff][\u4e00-\u9fff，。？！、；：]*)\s+(.+?)(\s*\[sound:[^\]]+\])?\s*$/);
   if (m){
     line.appendChild(el("div", "exline-zh", m[1]));
     const pyEl = el("div", "exline-py", m[2]);
-    for (const f of soundFiles(exampleText)) pyEl.appendChild(audioButton(f, true));
+    if (!opts || !opts.noAudio) for (const f of soundFiles(exampleText)) pyEl.appendChild(audioButton(f, true));
     line.appendChild(pyEl);
   } else {
     line.appendChild(el("div", "exline-en", stripSoundTags(stripImgTags(exampleText))));
@@ -480,10 +523,17 @@ function showCard(){
     // Split layout: Chinese->English fronts play the word audio and show the
     // front example box; English->Chinese fronts show only the English box
     // (the word audio belongs to the answer, revealed on the back).
-    if (card.ws && card.deck && card.deck.includes("Chinese to English") && frontPy){
-      frontPy.appendChild(audioButton(card.ws, true));
+    if (card.exf != null){
+      // Vocabulary cards: ONE unified button below the example line plays
+      // the word first, then the example sentence (Chinese->English front).
+      // English->Chinese fronts stay silent; the audio is on the back.
+      const zhFront = !!(card.deck && card.deck.includes("Chinese to English"));
+      const shown = renderExampleLine($("qFrontExample"), card.exf, { noAudio: zhFront });
+      if (zhFront){
+        const files = [card.ws, ...soundFiles(card.exf)].filter(Boolean);
+        if (files.length) appendUnifiedAudio(shown ? $("qFrontExample") : $("qFrontAudio"), files);
+      }
     }
-    if (card.exf != null) renderExampleLine($("qFrontExample"), card.exf);
   } else {
     $("qFront").className = "front big"; $("qFront").textContent = card.zh;
     $("qHint").classList.remove("hidden");
@@ -509,13 +559,16 @@ function reveal(){
     } else {
       appendAnswerText(a, card.a);
     }
-    // English->Chinese backs play the word audio with the answer, inline after the pinyin.
-    if (card.ws && card.deck && card.deck.includes("English to Chinese") && ansPy){
-      ansPy.appendChild(audioButton(card.ws, true));
-    }
     $("qAnswer").appendChild(a);
     if (card.exb != null){
-      renderExampleLine($("qExample"), card.exb);
+      // English->Chinese backs: ONE unified button below the example line
+      // plays the word first, then the example sentence.
+      const enBack = !!(card.deck && card.deck.includes("English to Chinese"));
+      renderExampleLine($("qExample"), card.exb, { noAudio: enBack });
+      if (enBack){
+        const files = [card.ws, ...soundFiles(card.exb)].filter(Boolean);
+        if (files.length) appendUnifiedAudio($("qExample"), files);
+      }
     } else if (!isDash(card.ex)){
       renderExampleLine($("qExample"), card.ex);
     }
