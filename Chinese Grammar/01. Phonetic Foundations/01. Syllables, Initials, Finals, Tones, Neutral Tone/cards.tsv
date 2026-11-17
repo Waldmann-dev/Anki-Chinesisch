@@ -1,26 +1,14 @@
 Question	Answer	Example
-What does a Chinese syllable consist of?	Initial + Final + Tone mark. The initial is optional, the final is mandatory.	大 dà (big) = d + a + 4th tone [sound:da.mp3]
 What does shēngmǔ (声母) do in a syllable?	It IS the starting sound of a syllable. Every syllable begins with one: in 大 dà, the d is the shēngmǔ — the -a after it is the rest.	d in 大 dà (big) [sound:da.mp3]
 What does yùnmǔ (韵母) do in a syllable?	It is the rest of the syllable, everything after the starting sound: in 大 dà, the -a is the yùnmǔ. The tone sits on it.	a in 大 dà (big) [sound:da.mp3]
 What does shēngdiào (声调) do?	It IS the melody of a syllable — how your voice moves: flat, going up, dipping down-up, or falling. Same sound, different melody, different word: mā (mother) vs mà (to scold).	4th tone in 大 dà (big) [sound:da.mp3]
 What does shēngfú (声符) do?	It is the part of a character that hints at the sound: in 妈 mā (mother), the 马 mǎ part sounds almost like the whole character — that part is the shēngfú. The other part, 女 (woman), hints at the meaning.	马 mǎ in 妈 mā (mother)
-How does a syllable without an initial work?	It is a zero-initial syllable.	五 wǔ (five) [sound:wu.mp3]
-How does a syllable without a final work?	It cannot – the final is mandatory in every syllable.	–
-How is a zero-initial syllable built?	A syllable with no initial, only a final. It is written with y, w, yu, or '.	鹅 é (goose) [sound:e.mp3]
-How are zero-initial syllables written?	y, w, yu – they are spelling variants for syllables without a real initial.	一 yī (one) [sound:yi.mp3]
-How do tones work in Mandarin?	4 tones + neutral tone. The neutral tone is a weak, toneless variant.	妈 mā (mom) [sound:ma1.mp3]
 How are the 4 tones pronounced?	1st high-flat, 2nd rising, 3rd falling-rising, 4th falling.	–
 How is the 1st tone pronounced?	yīshēng, yīnpíng – the high-flat tone. High-flat, stays high: 55. Like singing one steady high note.	妈 mā (mom) [sound:ma1.mp3] <img src="tone_1st.png">
 How is the 2nd tone pronounced?	èrshēng, yángpíng – the rising tone. Rising, low to high: 35. Like asking "What?" in English.	麻 má (hemp) [sound:ma2.mp3] <img src="tone_2nd.png">
 How is the 3rd tone pronounced?	sānshēng, shǎngshēng – the falling-rising tone. Falling then rising, low dip: 214. In speech often only the fall (half-3rd).	马 mǎ (horse) [sound:ma3.mp3] <img src="tone_3rd.png">
 How is the 4th tone pronounced?	sìshēng, qùshēng – the falling tone. Falling, high to low, sharp: 51. Like a firm "No!".	骂 mà (to scold) [sound:ma4.mp3] <img src="tone_4th.png">
 How is the neutral tone pronounced?	qīngshēng – the light, toneless tone. Weak, short, no fixed pitch. It is a tone reduction, not a full tone.	吗 ma (question particle) [sound:ma0.mp3]
-How is the 1st tone marked?	— (flat bar) over the main vowel.	妈 mā (mom) [sound:ma1.mp3]
-How is the 2nd tone marked?	´ (rising) over the main vowel.	麻 má (hemp) [sound:ma2.mp3]
-How is the 3rd tone marked?	ˇ (falling-rising) over the main vowel.	马 mǎ (horse) [sound:ma3.mp3]
-How is the 4th tone marked?	` (falling) over the main vowel.	骂 mà (to scold) [sound:ma4.mp3]
-How is the neutral tone marked?	No mark. It is sometimes shown as · to mark it as toneless.	吗 ma (question particle) [sound:ma0.mp3]
-Why do tones matter?	Different tone = different meaning. The same syllable changes meaning with tone.	妈 mā (mom) vs 骂 mà (to scold)<div class="sndrow">[sound:ma1.mp3] [sound:ma4.mp3]</div>
 Where is the tone mark if there is only 1 vowel?	Directly over that vowel.	路 lù (road) [sound:lu.mp3]
 Where is the tone mark if there are 2+ vowels?	Over the main vowel – the vowel with the widest mouth opening.	好 hǎo (good) [sound:hao.mp3]
 What is the order for tone-mark placement?	a > o > e > i > u > ü. The widest vowel gets the mark first.	–
@@ -38,7 +26,6 @@ How are the initials pronounced?	b – lips together, no puff, like p in "spa" [
 How are b and p pronounced differently?	Same place; b is unaspirated, p is aspirated (with a puff of air).	[sound:initial_b.mp3] [sound:initial_p.mp3] <img src="tongue_bilabial.png">
 How are d and t pronounced differently?	Same place; d is unaspirated, t is aspirated.	[sound:initial_d.mp3] [sound:initial_t.mp3] <img src="tongue_alveolar.png">
 How do you pronounce m / n?	m, n – mouth closed for the sound, air goes through the nose. The final -ng works the same way.	m – lips closed, air through the nose [sound:initial_m.mp3]<br>n – tongue tip up, air through the nose [sound:initial_n.mp3]<br><img src="tongue_nasal.png">
-How are the simple finals pronounced?	a – mouth wide open, like "ah" in "father" [sound:final_a.mp3]<br>o – lips round, like "o" in "go" [sound:final_o.mp3]<br>e – lips flat, like "uh" in "her" [sound:final_e.mp3]<br>i – wide smile, like "ee" in "see" [sound:final_i.mp3]<br>u – lips pushed out, like "oo" in "food" [sound:final_u.mp3]<br>ü – say "ee" with lips rounded like "oo" [sound:final_v.mp3]<br>-i – not a real i, just a buzz after z, c, s and zh, ch, sh, r (no clip of its own in the package)	
 How are bo, po, mo, fo pronounced?	Written as -o, but said with a short u first: bo = 'bwo', po = 'pwo', mo = 'mwo', fo = 'fwo'. You read 'bo', but you say 'buo' — just very short.	bo → buo<div class="sndrow">[sound:bo.mp3]</div>
 How do you pronounce final e?	Tongue like for o, lips flattened and opened like a smile. Like "uh" in "her".	[sound:final_e.mp3]
 How do you pronounce final ü?	Tongue like for i, lips rounded.	[sound:final_v.mp3]
