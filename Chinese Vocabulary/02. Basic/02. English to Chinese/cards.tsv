@@ -14,7 +14,7 @@ hello	你好 nǐ hǎo	ni_hao.mp3	How are you?	你好吗？ Nǐ hǎo ma? [sound:e
 zero	零 líng	ling.mp3	He has zero (of them).	他有零个。 Tā yǒu líng gè. [sound:ex_ta_you_ling_ge.mp3]
 yes	是的 shì de	shi_de.mp3	Yes, I am very well.	是的，我很好。 Shì de, wǒ hěn hǎo. [sound:ex_shi_de_wo_hen_hao.mp3]
 no	不是 bú shì	bu_shi.mp3	No, I am not busy.	不是，我不忙。 Bú shì, wǒ bù máng. [sound:ex_bu_shi_wo_bu_mang.mp3]
-thanks	谢谢 xièxie	xie_xie.mp3	Thank you!	谢谢你！ Xièxie nǐ! [sound:ex_xiexie_ni.mp3]
+thanks	谢谢 xièxie	xie_xie.mp3	Thank you! You're welcome.	谢谢你！不客气。 Xièxie nǐ! Bù kèqi. [sound:ex_xiexie_bu_keqi.mp3]
 goodbye	再见 zàijiàn	zai_jian.mp3	Goodbye, thank you.	再见，谢谢你。 Zàijiàn, xièxie nǐ. [sound:ex_zaijian_xiexie_ni.mp3]
 too expensive	太贵了 tài guì le	tai_gui_le.mp3	This is too expensive.	这个太贵了。 Zhège tài guì le. [sound:ex_zhege_tai_gui_le.mp3]
 how much	多少 duōshao	duo_shao.mp3	How much is this?	这个多少？ Zhège duōshao? [sound:ex_zhege_duoshao.mp3]
@@ -52,3 +52,4 @@ aunt, father's sister	姑姑 gūgu	l1_gugu.mp3	My aunt is very well.	我姑姑�
 aunt, wife of father's younger brother	婶婶 shěnshen	l1_shenshen.mp3	My aunt is very busy.	我婶婶很忙。 Wǒ shěnshen hěn máng. [sound:l1_shenshen.mp3]
 grandmother, mother's side	外婆 wàipó	l1_waipo.mp3	This is my grandmother.	这是我外婆。 Zhè shì wǒ wàipó. [sound:l1_waipo.mp3]
 to speak, to say	说 shuō	u13_shuo.mp3	She speaks Chinese.	她说汉语。 Tā shuō Hànyǔ. [sound:u13_shuo.mp3]
+to drink tea	喝茶 hē chá	u19_hecha.mp3	She drinks tea.	她喝茶。 Tā hē chá. [sound:u19_hecha.mp3]

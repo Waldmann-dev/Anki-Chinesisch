@@ -14,7 +14,7 @@ Question	Answer	WordSound	ExampleFront	ExampleBack
 零 líng	zero	ling.mp3	他有零个。 Tā yǒu líng gè. [sound:ex_ta_you_ling_ge.mp3]	He has zero (of them).
 是的 shì de	yes	shi_de.mp3	是的，我很好。 Shì de, wǒ hěn hǎo. [sound:ex_shi_de_wo_hen_hao.mp3]	Yes, I am very well.
 不是 bú shì	no	bu_shi.mp3	不是，我不忙。 Bú shì, wǒ bù máng. [sound:ex_bu_shi_wo_bu_mang.mp3]	No, I am not busy.
-谢谢 xièxie	thanks	xie_xie.mp3	谢谢你！ Xièxie nǐ! [sound:ex_xiexie_ni.mp3]	Thank you!
+谢谢 xièxie	thanks	xie_xie.mp3	谢谢你！不客气。 Xièxie nǐ! Bù kèqi. [sound:ex_xiexie_bu_keqi.mp3]	Thank you! You're welcome.
 再见 zàijiàn	goodbye	zai_jian.mp3	再见，谢谢你。 Zàijiàn, xièxie nǐ. [sound:ex_zaijian_xiexie_ni.mp3]	Goodbye, thank you.
 太贵了 tài guì le	too expensive	tai_gui_le.mp3	这个太贵了。 Zhège tài guì le. [sound:ex_zhege_tai_gui_le.mp3]	This is too expensive.
 多少 duōshao	how much	duo_shao.mp3	这个多少？ Zhège duōshao? [sound:ex_zhege_duoshao.mp3]	How much is this?
@@ -65,3 +65,4 @@ Question	Answer	WordSound	ExampleFront	ExampleBack
 婶婶 shěnshen	aunt, wife of father's younger brother	l1_shenshen.mp3	我婶婶很忙。 Wǒ shěnshen hěn máng. [sound:l1_shenshen.mp3]	My aunt is very busy.
 外婆 wàipó	grandmother, mother's side	l1_waipo.mp3	这是我外婆。 Zhè shì wǒ wàipó. [sound:l1_waipo.mp3]	This is my grandmother.
 说 shuō	to speak, to say	u13_shuo.mp3	她说汉语。 Tā shuō Hànyǔ. [sound:u13_shuo.mp3]	She speaks Chinese.
+喝茶 hē chá	to drink tea	u19_hecha.mp3	她喝茶。 Tā hē chá. [sound:u19_hecha.mp3]	She drinks tea.
